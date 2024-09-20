@@ -1,21 +1,23 @@
+// Form.jsx
+import React from 'react';
 
-function FormContents() {
-  return (
-    <div>
-      <div>
-        <label>
-          Email:
-          <input type="text" name="name" />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input type="password" name="password" />
-        </label>
-      </div>
-    </div>
-  );
+function Form({ fields, onSubmit, buttonText }) {
+    return (
+        <form onSubmit={onSubmit}>
+            {fields.map((field, index) => (
+                <div key={index}>
+                    <label>{field.label}</label>
+                    <input
+                        type={field.type}
+                        name={field.name}
+                        value={field.value}
+                        onChange={field.onChange}
+                    />
+                </div>
+            ))}
+            <button type="submit">{buttonText}</button>
+        </form>
+    );
 }
 
-export default FormContents;
+export default Form;

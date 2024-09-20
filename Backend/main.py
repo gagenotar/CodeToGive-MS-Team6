@@ -185,22 +185,21 @@ def get_students(db: Session = Depends(get_db)):
     return [
         {
             "student_id": student[0],
-            "student_name": student[1],
-            "email": student[2],
-            "password": student[3],
-            "experience": student[4],
-            "highest_education_level": student[5],
-            "major": student[6],
-            "university": student[7],
-            "skills": student[8],
-            "street": student[9],
-            "state": student[10],
-            "country": student[11],
-            "zipcode": student[12]
+            "student_name": student[1] or "Unknown",  # Handle NULL with a default value
+            "email": student[2] or "No email provided",  # Handle NULL with a default value
+            "password": student[3] or "No password set",  # Handle NULL with a default value
+            "experience": student[4] or 0,  # Handle NULL with a default integer value
+            "highest_education_level": student[5] or "Unknown",  # Handle NULL with a default value
+            "major": student[6] or "Unknown",  # Handle NULL with a default value
+            "university": student[7] or "Unknown",  # Handle NULL with a default value
+            "skills": student[8] or "No skills listed",  # Handle NULL with a default value
+            "street": student[9] or "No street provided",  # Handle NULL with a default value
+            "state": student[10] or "No state provided",  # Handle NULL with a default value
+            "country": student[11] or "No country provided",  # Handle NULL with a default value
+            "zipcode": student[12] or "No zipcode provided"  # Handle NULL with a default value
         }
         for student in students
     ]
-
 # Fetch a single student by their student_id
 # Fetch a single student by their student_id
 # Fetch a single student by their student_id

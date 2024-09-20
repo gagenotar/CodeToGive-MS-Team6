@@ -155,6 +155,33 @@ def get_students(db: Session = Depends(get_db)):
         for student in students
     ]
 
+
+
+# Fetch a single student by their student_id
+@app.get("/student/{student_id}")
+def get_student(student_id: int, db: Session = Depends(get_db)):
+    # Fetch student from the database using their student_id
+    student = db.execute(text("SELECT * FROM students WHERE student_id = :student_id"), {"student_id": student_id}).fetchone()
+    
+    # If student does not exist, raise a 404 error
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    # Return student details
+    return {
+        "student_id": student[0],
+        "student_name": student[1],
+        "email": student[2],
+        "experience": student[4],
+        "highest_education_level": student[5],
+        "major": student[6],
+        "skills": student[8],
+        "street": student[9],
+        "state": student[10],
+        "country": student[11],
+        "zipcode": student[12]
+    }
+
 # GET endpoint to retrieve all jobs
 @app.get("/jobs", response_model=List[JobCreate])
 def get_jobs(db: Session = Depends(get_db)):
@@ -200,6 +227,39 @@ def create_student(student: StudentCreate, db: Session = Depends(get_db)):
     db.commit()
     return student
 
+
+# Fetch a single job by its job_id
+@app.get("/jobs/{job_id}")
+def get_job(job_id: int, db: Session = Depends(get_db)):
+    # Fetch job from the database using its job_id
+    job = db.execute(text("SELECT * FROM jobs WHERE job_id = :job_id"), {"job_id": job_id}).fetchone()
+    
+    # If job does not exist, raise a 404 error
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    
+    # Return job details as a dictionary
+    return {
+        "job_id": job[0],
+        "title": job[1],
+        "description": job[2],
+        "skills_required": job[3],
+        "experience_required": job[4],
+        "street": job[5],
+        "state": job[6],
+        "country": job[7],
+        "zipcode": job[8],
+        "company_name": job[9],
+        "salary_range": job[10],
+        "employment_type": job[11],
+        "application_deadline": job[12],
+        "bachelors_needed": job[13],
+        "masters_needed": job[14],
+        "valid_majors": job[15]
+    }
+
+
+
 # POST endpoint to add a job
 @app.post("/jobs", response_model=JobCreate)
 def create_job(job: JobCreate, db: Session = Depends(get_db)):
@@ -215,6 +275,7 @@ def create_job(job: JobCreate, db: Session = Depends(get_db)):
     )
     db.commit()
     return job
+
 
 
 

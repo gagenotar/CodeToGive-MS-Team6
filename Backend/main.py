@@ -4,10 +4,23 @@ from typing import List
 from sqlalchemy import create_engine, Column, Integer, String, Text, Date, TIMESTAMP, Boolean, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
-from datetime import date
+from datetime import date, datetime
+from dotenv import load_dotenv
+import os
+import cohere
+
+# Load the .env file
+load_dotenv()
+
 
 # Create FastAPI instance
 app = FastAPI()
+
+
+
+# Cohere API setup
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+co = cohere.Client(COHERE_API_KEY)
 
 # MySQL Database URL (with your credentials)
 DATABASE_URL = "mysql+pymysql://sql5732473:xUKVrFsRsN@sql5.freemysqlhosting.net:3306/sql5732473"
@@ -106,6 +119,20 @@ def get_students(db: Session = Depends(get_db)):
     if not students:
         raise HTTPException(status_code=404, detail="No students found")
     
+
+    # Load the .env file
+    load_dotenv()
+
+    # Retrieve the API key from the environment variables
+    COHERE_API_KEY = os.getenv('COHERE_API_KEY')
+    #print(COHERE_API_KEY)
+    #COHERE_API_KEY="7WcD3PeQenuLegXolg2KwuD1riM4YGdgPlEwgblm"
+    # Initialize the Cohere client with the API key
+    co = cohere.Client(COHERE_API_KEY)
+
+    if not COHERE_API_KEY:
+        raise Exception("Cohere API Key is missing. Set the COHERE_API_KEY environment variable.")
+        
     #print(students)
     # Convert each row to a dictionary
     #return [dict(student) for student in students]
@@ -188,3 +215,94 @@ def create_job(job: JobCreate, db: Session = Depends(get_db)):
     )
     db.commit()
     return job
+
+
+
+# Match job to user profile
+@app.get("/match_job/{student_id}")
+def match_job_to_user(student_id: int, db: Session = Depends(get_db)):
+    # Fetch student data from the students table
+    student = db.execute(text("""
+        SELECT student_name, highest_education_level, major, skills, experience 
+        FROM students 
+        WHERE student_id = :student_id
+    """), {"student_id": student_id}).fetchone()
+
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    # Unpack student data
+    student_name, highest_education_level, major, student_skills, student_experience = student
+
+    # Fetch jobs where deadline hasn't expired and bachelor's or master's required and matching valid majors
+    jobs = db.execute(text("""
+        SELECT job_id, title, description, skills_required, experience_required, application_deadline, valid_majors
+        FROM jobs 
+        WHERE application_deadline >= :current_date
+        AND (
+            (bachelors_needed = 1 AND :highest_education_level = 'Bachelors')
+            OR (masters_needed = 1 AND :highest_education_level = 'Masters')
+        )
+    """), {
+        "current_date": datetime.today().date(),
+        "highest_education_level": highest_education_level
+    }).fetchall()
+
+    print ()
+
+    if not jobs:
+        raise HTTPException(status_code=404, detail="No matching jobs found")
+
+    # Filter jobs based on the student's major
+    valid_jobs = []
+    for job in jobs:
+        job_id, title, description, skills_required, experience_required, application_deadline, valid_majors = job
+        valid_majors_list = [major.strip().lower() for major in valid_majors.split(',')]
+        
+        # Check if the student's major is in the valid majors for the job
+        if major.lower() in valid_majors_list:
+            valid_jobs.append(job)
+
+    if not valid_jobs:
+        raise HTTPException(status_code=404, detail="No jobs matched with the student's major")
+
+    # Prepare job matches
+    job_matches = []
+    
+    for job in valid_jobs:
+        job_id, title, description, skills_required, experience_required, application_deadline, _ = job
+        
+        # Prepare a prompt for Cohere API
+        prompt = f"""
+        Job Title: {title}
+        Job Description: {description}
+        Required Skills: {skills_required}
+        Required Experience: {experience_required} years
+        
+        Student Profile:
+        Name: {student_name}
+        Skills: {student_skills}
+        Experience: {student_experience} years
+        
+        Based on the job description and student's profile, return a match score between 0 and 1 and provide reasoning.
+        """
+        cleaned_prompt = prompt.strip()
+        # Call Cohere API to generate match score
+        response = co.generate(
+            model='command-xlarge-nightly',  # Cohere's advanced model
+            prompt=prompt,
+            max_tokens=100,  # Adjust max tokens for a concise response
+            temperature=0.7,  # Balance between deterministic and creative responses
+            stop_sequences=["\n"]
+        )
+        match_score = response.generations[0].text.strip()
+
+        # Add the match result to the list
+        job_matches.append({
+            "job_id": job_id,
+            "job_title": title,
+            "match_score": match_score,
+            "application_deadline": application_deadline
+        })
+
+    return job_matches

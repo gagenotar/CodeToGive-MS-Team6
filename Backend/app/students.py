@@ -171,7 +171,8 @@ def match_job_to_user(student_id: int, db: Session = Depends(get_db)):
     valid_jobs = []
     for job in jobs:
         job_id, title, description, skills_required, experience_required, application_deadline, valid_majors = job
-        valid_majors_list = [major.strip().lower() for major in valid_majors.split(',')]
+        if valid_majors:
+         valid_majors_list = [major.strip().lower() for major in valid_majors.split(',')]
         if major.lower() in valid_majors_list:
             valid_jobs.append(job)
 

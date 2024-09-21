@@ -31,8 +31,17 @@ const Admin = () => {
                     <div className="card-body">
                         <h5 className="card-title">{job.title}</h5>
                         <p className="card-text">{job.description}</p>
-                        <a href="#" className="btn btn-primary mx-1">Edit</a>
-                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                        <div className='row mb-3'>
+                            <div>
+                                <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                <a href="#" className="btn btn-danger mx-1">Delete</a>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div>
+                                <a href={`matches/${job.id}`} className="btn btn-primary mx-1">View Matches</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -58,16 +67,34 @@ const Admin = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">Job Title</h5>
                                         <p className="card-text">Job Description</p>
-                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                        <div className='row mb-3'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                                <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">View Matches</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="card mt-3">
                                     <div className="card-body">
                                         <h5 className="card-title">Job Title</h5>
                                         <p className="card-text">Job Description</p>
-                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                        <div className='row mb-3'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                                <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">View Matches</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -84,16 +111,34 @@ const Admin = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">Event Title</h5>
                                         <p className="card-text">Event Description</p>
-                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                        <div className='row mb-3'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                                <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">View Matches</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="card mt-3">
                                     <div className="card-body">
                                         <h5 className="card-title">Event Title</h5>
                                         <p className="card-text">Event Description</p>
-                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                        <div className='row mb-3'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                                <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div>
+                                                <a href="#" className="btn btn-primary mx-1">View Matches</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

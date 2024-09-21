@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from '../components/Form';
 import api from '../api';
 
-function Login() {
+const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -20,8 +20,16 @@ function Login() {
         // Handle registration logic here
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const response = await api.post('/login/', { email, password });
+        var response = await api.post('/login/', { email, password });
         console.log(response.data);
+
+        // Here we should parse the student_id from the response like so:
+        // student_id = response.data.student_id;
+        // For now we will just hardcode the student_id to 1
+        const student_id = 1;
+
+        localStorage.setItem('student_id', student_id);
+        window.location.href = '/home'; 
     };
 
     const fields = [

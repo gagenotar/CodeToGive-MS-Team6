@@ -4,6 +4,7 @@ import AdminNavBar from '../components/AdminNavBar';
 
 const Admin = () => {
     const [admin, setAdmin] = useState({});
+    const [jobs, setJobs] = useState([]);
     const jobadmin_id = localStorage.getItem('jobadmin_id');
 
     useEffect(() => {
@@ -12,61 +13,88 @@ const Admin = () => {
             setAdmin(response.data);
         };
 
+        const getJobs = async () => {
+            const response = await api.get('/job_admin/postedby/' + jobadmin_id);
+            setJobs(response.data);
+        }
+
         if (jobadmin_id) {
             getAdmin();
+            getJobs();
         }
     }, [jobadmin_id]);
+
+    const displayJobs = () => {
+        return jobs.map((job) => {
+            return (
+                <div className="card mt-3" key={job.id}>
+                    <div className="card-body">
+                        <h5 className="card-title">{job.title}</h5>
+                        <p className="card-text">{job.description}</p>
+                        <a href="#" className="btn btn-primary mx-1">Edit</a>
+                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                    </div>
+                </div>
+            );
+        });
+    }
 
     return (
       <div>
         <AdminNavBar />
         <h1>Home</h1>
         <p>Welcome to the admin page, {admin.name}</p>
-        <div class="container" id='home-wrapper'>
-            <div class="row mb-3">
-              <div class="col">
-                <a href="/jobs" class="btn btn-primary">View Jobs</a>
-              </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Profile</h5>
-                            {admin && (
-                                <div>
-                                    <p>{admin.name}</p>
-                                    <p>{admin.email}</p>
+        <div className="container" id='home-wrapper'>
+            <div className="row mb-3 justify-content-center">
+                <div className="col">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Jobs</h5>
+                            <p className="card-text">Here are your jobs</p>
+                            <a href="/jobs" className="btn btn-primary">Upload Job</a>
+                            {displayJobs()}
+                            <div className="card mt-3">
+                                <div className="card-body">
+                                    <h5 className="card-title">Job Title</h5>
+                                    <p className="card-text">Job Description</p>
+                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
                                 </div>
-                            )}
-                            <a href="/jobs" class="btn btn-primary">View Jobs</a>
-                            
+                            </div>
+                            <div className="card mt-3">
+                                <div className="card-body">
+                                    <h5 className="card-title">Job Title</h5>
+                                    <p className="card-text">Job Description</p>
+                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Matched Jobs</h5>
-                            <p class="card-text">List of matched jobs</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Notification</h5>
-                            <p class="card-text">List of notifications</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3 justify-content-center">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Events</h5>
-                            <p class="card-text">List of events</p>
+                <div className="col">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Events</h5>
+                            <p className="card-text">Here are your events</p>
+                            <a href="/events" className="btn btn-primary">Upload Event</a>
+                            {displayJobs()}
+                            <div className="card mt-3">
+                                <div className="card-body">
+                                    <h5 className="card-title">Event Title</h5>
+                                    <p className="card-text">Event Description</p>
+                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                </div>
+                            </div>
+                            <div className="card mt-3">
+                                <div className="card-body">
+                                    <h5 className="card-title">Event Title</h5>
+                                    <p className="card-text">Event Description</p>
+                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,4 +104,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default Admin;

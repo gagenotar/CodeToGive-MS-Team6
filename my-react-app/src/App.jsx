@@ -7,6 +7,7 @@ import Profile from "./pages/Profile"
 import LoginAdmin from "./pages/AdminLogin"
 import RegisterAdmin from "./pages/AdminRegister"
 import Admin from "./pages/Admin"
+import Jobs from "./pages/Jobs"
 
 function Logout() {
   localStorage.clear()
@@ -31,10 +32,11 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />}/>
         <Route path="/logout" element={<Logout />}/>
         <Route path="/home" element={<Home />}/>
+        <Route path="/profile" element={<Profile />}/>
         <Route path="/login/admin" element={<LoginAdmin />}/>
         <Route path="/register/admin" element={<RegisterAndLogoutAdmin />}/>
         <Route path="/admin" element={<Admin />}/>
-        <Route path="/profile" element={<Profile />}/>
+        <Route path="/jobs" element={<Jobs />}/>
       </Routes>
     </BrowserRouter>
   )

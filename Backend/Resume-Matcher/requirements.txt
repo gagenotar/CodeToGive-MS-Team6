@@ -1,0 +1,5 @@
+spacy==3.0
+en-core-web-md
+qdrant-client==1.8.2
+textacy==0.13.0
+pypdf==3.17.0

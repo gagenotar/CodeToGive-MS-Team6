@@ -1,0 +1,4 @@
+2024-09-21 12:25:42,283 (run_first.py:43) - INFO: Started to read from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Resumes/
+2024-09-21 12:25:42,283 (run_first.py:49) - ERROR: There are no resumes present in the specified folder.
+2024-09-21 12:25:42,284 (run_first.py:50) - ERROR: Exiting from the program.
+2024-09-21 12:25:42,284 (run_first.py:51) - ERROR: Please add resumes in the C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Resumes/ folder and try again.

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import Form from '../components/Form';
 import api from '../api';
+import alpfaLogo from "../img/alpfaLogo.png";
+import RegisterForm from "../components/RegisterForm"
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        student_name: '',
+        name: '',
         email: '',
         password: ''
     });
@@ -21,22 +22,37 @@ const Register = () => {
         // Handle registration logic here
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const student_name = e.target.student_name.value;
+        const student_name = e.target.name.value;
         const response = await api.post('/students/register', { student_name, email, password });
         console.log(response.data);
+
+        if (response.status === 200) {
+            window.location.href = '/login';
+        } else {
+            alert('Registration failed');
+        }
     };
 
-    const fields = [
-        { label: 'Student Name', type: 'text', name: 'student_name', value: formData.student_name, onChange: handleChange },
-        { label: 'Email', type: 'text', name: 'email', value: formData.email, onChange: handleChange },
-        { label: 'Password', type: 'password', name: 'password', value: formData.password, onChange: handleChange }
-    ];
+
+    const fields = {
+        email: formData.email, 
+        name: formData.name,
+        password: formData.password
+    }
+
 
     return (
-        <>
-            <h1>Register</h1>
-            <Form fields={fields} onSubmit={handleSubmit} buttonText="register" />
-        </>
+      <div className="background-color">
+        <div className="form-header">
+          <div className="title">Sign Up</div>
+          <img className="logo" src={alpfaLogo} alt="" />
+        </div>
+        <RegisterForm
+          fields={fields}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      </div>
     );
 }
 

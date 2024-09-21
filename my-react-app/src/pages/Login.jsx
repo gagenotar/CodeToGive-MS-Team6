@@ -1,48 +1,64 @@
-import React, { useState } from 'react';
-import Form from '../components/Form';
-import api from '../api';
+import React, { useState } from "react";
+import api from "../api";
+import alpfaLogo from "../img/alpfaLogo.png";
+import LoginForm from "../components/LoginForm";
 
 const Login = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Handle registration logic here
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    var response = await api.post("/login/", { email, password });
+    console.log(response.data);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // Handle registration logic here
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        var response = await api.post('/login/', { email, password });
-        console.log(response.data);
+    // Here we should parse the student_id from the response like so:
+    const student_id = response.data.student_id;
 
-        // Here we should parse the student_id from the response like so:
-        // student_id = response.data.student_id;
-        // For now we will just hardcode the student_id to 1
-        const student_id = 1;
+    // We should also parse the role from the response like so:
+    const role = response.data.role || 'student';
 
-        localStorage.setItem('student_id', student_id);
-        window.location.href = '/home'; 
-    };
+    localStorage.setItem("student_id", student_id);
+    localStorage.setItem("role", role);
 
-    const fields = [
-        { label: 'Email', type: 'text', name: 'email', value: formData.email, onChange: handleChange },
-        { label: 'Password', type: 'password', name: 'password', value: formData.password, onChange: handleChange }
-    ];
+    if (role === 'student') {
+      window.location.href = "/home";
+    } else {
+      window.location.href = "/admin";
+    }
+  };
 
-    return (
-        <>
-            <h1>Login</h1>
-            <Form fields={fields} onSubmit={handleSubmit} buttonText="login" />
-        </>
-    );
-}
+  const fields = {
+    email: formData.email,
+    password: formData.password,
+  };
+
+  return (
+      <div className="background-color">
+        <div className="form-header">
+          <div className="title">Welcome! Login</div>
+          <img className="logo" src={alpfaLogo} alt="" />
+        </div>
+        <LoginForm
+          fields={fields}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      </div>
+ 
+  );
+};
 
 export default Login;

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import api from '../api';
-import RegisterForm from "../components/RegisterForm"
 import alpfaLogo from "../img/alpfaLogo.png";
+import RegisterForm from "../components/RegisterForm"
+
 const Register = () => {
     const [formData, setFormData] = useState({
-        student_name: '',
+        name: '',
         email: '',
         password: ''
     });
@@ -21,9 +22,15 @@ const Register = () => {
         // Handle registration logic here
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const student_name = e.target.student_name.value;
+        const student_name = e.target.name.value;
         const response = await api.post('/students/register', { student_name, email, password });
         console.log(response.data);
+
+        if (response.status === 200) {
+            window.location.href = '/login';
+        } else {
+            alert('Registration failed');
+        }
     };
 
 

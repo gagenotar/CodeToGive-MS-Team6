@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 
 export default function LoginForm({fields, onSubmit, onChange}) {
   return (
-
-      <form className="form-submission">
+      <form className="form-submission" onSubmit={onSubmit}>
         <div className="subtitle-input-pair">
           <label className="form-subtitle" htmlFor="email">
             Email

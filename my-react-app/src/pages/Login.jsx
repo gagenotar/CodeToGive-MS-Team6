@@ -36,13 +36,13 @@ const Login = () => {
     localStorage.setItem("student_id", student_id);
     window.location.href = "/home";
   };
+
   const fields = {
     email: formData.email,
     password: formData.password,
   };
 
   return (
-
       <div className="background-color">
         <div className="form-header">
           <div className="title">Welcome! Login</div>

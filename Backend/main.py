@@ -9,13 +9,22 @@ from dotenv import load_dotenv
 import os
 import cohere
 from fastapi.responses import JSONResponse
-
+from fastapi.middleware.cors import CORSMiddleware
 
 # Load the .env file
 load_dotenv()
 
 # Create FastAPI instance
 app = FastAPI()
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can specify the domains you want to allow, e.g., ["http://localhost", "https://example.com"]
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Cohere API setup
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")

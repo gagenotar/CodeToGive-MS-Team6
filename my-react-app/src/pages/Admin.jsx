@@ -42,57 +42,59 @@ const Admin = () => {
     return (
       <div>
         <AdminNavBar />
-        <h1>Home</h1>
-        <p>Welcome to the admin page, {admin.name}</p>
-        <div className="container" id='home-wrapper'>
-            <div className="row mb-3 justify-content-center">
-                <div className="col">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Jobs</h5>
-                            <p className="card-text">Here are your jobs</p>
-                            <a href="/jobs" className="btn btn-primary">Upload Job</a>
-                            {displayJobs()}
-                            <div className="card mt-3">
-                                <div className="card-body">
-                                    <h5 className="card-title">Job Title</h5>
-                                    <p className="card-text">Job Description</p>
-                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+        <div className='container-fluid'>
+            <h1>Home</h1>
+            <p>Welcome to the admin page, {admin.name}</p>
+            <div className="container" id='home-wrapper'>
+                <div className="row mb-3 justify-content-center">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Jobs</h5>
+                                <p className="card-text">Here are your jobs</p>
+                                <a href="/jobs" className="btn btn-primary">Upload Job</a>
+                                {displayJobs()}
+                                <div className="card mt-3">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Job Title</h5>
+                                        <p className="card-text">Job Description</p>
+                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="card mt-3">
-                                <div className="card-body">
-                                    <h5 className="card-title">Job Title</h5>
-                                    <p className="card-text">Job Description</p>
-                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                <div className="card mt-3">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Job Title</h5>
+                                        <p className="card-text">Job Description</p>
+                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="col">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Events</h5>
-                            <p className="card-text">Here are your events</p>
-                            <a href="/events" className="btn btn-primary">Upload Event</a>
-                            {displayJobs()}
-                            <div className="card mt-3">
-                                <div className="card-body">
-                                    <h5 className="card-title">Event Title</h5>
-                                    <p className="card-text">Event Description</p>
-                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Events</h5>
+                                <p className="card-text">Here are your events</p>
+                                <a href="/events" className="btn btn-primary">Upload Event</a>
+                                {displayJobs()}
+                                <div className="card mt-3">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Event Title</h5>
+                                        <p className="card-text">Event Description</p>
+                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="card mt-3">
-                                <div className="card-body">
-                                    <h5 className="card-title">Event Title</h5>
-                                    <p className="card-text">Event Description</p>
-                                    <a href="#" className="btn btn-primary mx-1">Edit</a>
-                                    <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                <div className="card mt-3">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Event Title</h5>
+                                        <p className="card-text">Event Description</p>
+                                        <a href="#" className="btn btn-primary mx-1">Edit</a>
+                                        <a href="#" className="btn btn-danger mx-1">Delete</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

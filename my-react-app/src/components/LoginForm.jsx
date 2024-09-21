@@ -35,7 +35,7 @@ export default function LoginForm({fields, onSubmit, onChange}) {
             required
           />
         </div>
-        <button type="submit" className="btn-form" onSubmit={onSubmit}>
+        <button type="submit" className="btn-form">
           Login
         </button>
         <div className="footer-section">
@@ -54,6 +54,6 @@ LoginForm.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
   }),
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func,
 };

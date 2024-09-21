@@ -28,9 +28,10 @@ const Login = () => {
     const student_id = response.data.student_id;
 
     // We should also parse the role from the response like so:
-    const role = response.data.role || 'admin';
+    const role = response.data.role || 'student';
 
     localStorage.setItem("student_id", student_id);
+    localStorage.setItem("role", role);
 
     if (role === 'student') {
       window.location.href = "/home";

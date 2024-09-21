@@ -24,17 +24,19 @@ const Login = () => {
     var response = await api.post("/login/", { email, password });
     console.log(response.data);
 
-        // Here we should parse the student_id from the response like so:
-        const student_id = response.data.student_id;
+    // Here we should parse the student_id from the response like so:
+    const student_id = response.data.student_id;
 
-        // We should also parse the role from the response like so:
-        // const role = response.data.role;
-        // For now we will hardcode the role to 'student' or 'admin'
-        // const role = 'student';
-        const role = 'admin';
+    // We should also parse the role from the response like so:
+    const role = response.data.role || 'admin';
 
     localStorage.setItem("student_id", student_id);
-    window.location.href = "/home";
+
+    if (role === 'student') {
+      window.location.href = "/home";
+    } else {
+      window.location.href = "/admin";
+    }
   };
 
   const fields = {

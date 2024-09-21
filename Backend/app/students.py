@@ -194,7 +194,7 @@ def match_job_to_user(student_id: int, db: Session = Depends(get_db)):
         Skills: {student_skills}
         Experience: {student_experience} years
         
-        Based on the job description and student's profile, return a match score between 0 and 1 and provide reasoning.
+        Based on the job description and student's profile, return a match score between 0 and 1 (just number).
         """
         response = co.generate(
             model='command-xlarge-nightly',

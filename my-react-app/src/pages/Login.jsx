@@ -24,12 +24,21 @@ const Login = () => {
         console.log(response.data);
 
         // Here we should parse the student_id from the response like so:
-        // student_id = response.data.student_id;
-        // For now we will just hardcode the student_id to 1
-        const student_id = 1;
+        const student_id = response.data.student_id;
+
+        // We should also parse the role from the response like so:
+        // const role = response.data.role;
+        // For now we will hardcode the role to 'student' or 'admin'
+        // const role = 'student';
+        const role = 'admin';
 
         localStorage.setItem('student_id', student_id);
-        window.location.href = '/home'; 
+
+        if (role === 'admin') {
+            window.location.href = '/admin';
+        } else {
+            window.location.href = '/home'; 
+        }
     };
 
     const fields = [

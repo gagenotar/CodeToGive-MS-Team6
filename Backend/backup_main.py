@@ -62,6 +62,8 @@ class Student(Base):
     country = Column(String(100))
     zipcode = Column(String(20))
 
+from sqlalchemy import ForeignKey
+
 class Job(Base):
     __tablename__ = "jobs"
     job_id = Column(Integer, primary_key=True, index=True)
@@ -81,6 +83,8 @@ class Job(Base):
     masters_needed = Column(Boolean, default=False)
     valid_majors = Column(Text)
     created_at = Column(TIMESTAMP, default=None)
+    posted_by = Column(Integer, ForeignKey('job_admin.jobadmin_id'), nullable=False)  # References job_admin
+
 
 # Pydantic models for request/response validation
 
@@ -102,7 +106,7 @@ class StudentCreate(BaseModel):
 
 # Job creation model (now using `datetime.date` instead of SQLAlchemy's `Date`)
 class JobCreate(BaseModel):
-    job_id: str
+    #job_id: str
     title: str
     description: str
     skills_required: str
@@ -118,6 +122,8 @@ class JobCreate(BaseModel):
     bachelors_needed: bool
     masters_needed: bool
     valid_majors: str
+    posted_by: int  # Add this field to track who posted the job
+
 
 # Pydantic model for updating student details (only optional fields)
 class StudentUpdate(BaseModel):
@@ -146,6 +152,65 @@ class LoginModel(BaseModel):
     email: str
     password: str
 
+
+
+# Pydantic model for login request
+class AdminLoginModel(BaseModel):
+    email: str
+    password: str
+
+
+# Pydantic model for job admin registration
+class AdminRegisterModel(BaseModel):
+    name: str
+    email: str
+    password: str
+
+# POST endpoint for job admin login
+@app.post("/job_admin/login")
+def admin_login(user: AdminLoginModel, db: Session = Depends(get_db)):
+    # Check if the admin exists
+    existing_admin = db.execute(
+        text("SELECT * FROM job_admin WHERE email = :email"),
+        {"email": user.email}
+    ).fetchone()
+
+    if not existing_admin:
+        return JSONResponse(status_code=404, content={"detail": "Admin not found"})
+
+    # Check if the password matches
+    if existing_admin[3] != user.password:  # Assuming password is the 4th field in the row
+        return JSONResponse(status_code=400, content={"detail": "Invalid password"})
+
+    # Return job_admin_id and success message
+    return {"message": "Login successful", "jobadmin_id": existing_admin[0]}  # Assuming job_admin_id is the 1st field
+
+
+
+# POST endpoint for job admin registration
+@app.post("/job_admin/register")
+def register_job_admin(admin: AdminRegisterModel, db: Session = Depends(get_db)):
+    # Check if the email already exists in the job_admin table
+    existing_admin = db.execute(
+        text("SELECT * FROM job_admin WHERE email = :email"),
+        {"email": admin.email}
+    ).fetchone()
+
+    if existing_admin:
+        return JSONResponse(status_code=400, content={"detail": "Email already registered"})
+
+    # Insert the new job admin into the database
+    db.execute(
+        text("INSERT INTO job_admin (name, email, password) VALUES (:name, :email, :password)"),
+        {"name": admin.name, "email": admin.email, "password": admin.password}
+    )
+    db.commit()
+
+    # Return success message
+    return {"message": "Job Admin registered successfully"}
+
+
+
 @app.post("/login")
 def login(user: LoginModel, db: Session = Depends(get_db)):
     # Check if the user exists
@@ -163,6 +228,8 @@ def login(user: LoginModel, db: Session = Depends(get_db)):
 
     # Return student_id and success message
     return {"message": "Login successful", "student_id": existing_user[0]}  # Assuming student_id is the 1st field
+
+
 
 
 
@@ -349,20 +416,32 @@ def get_job(job_id: int, db: Session = Depends(get_db)):
     }
 
 # POST endpoint to add a job
-@app.post("/jobs", response_model=JobCreate)
+@app.post("/jobs")
 def create_job(job: JobCreate, db: Session = Depends(get_db)):
-    db.execute(
-        text("INSERT INTO jobs (title, description, skills_required, experience_required, street, state, country, zipcode, company_name, salary_range, employment_type, application_deadline, bachelors_needed, masters_needed, valid_majors) "
-             "VALUES (:title, :description, :skills_required, :experience_required, :street, :state, :country, :zipcode, :company_name, :salary_range, :employment_type, :application_deadline, :bachelors_needed, :masters_needed, :valid_majors)"),
+    result=db.execute(
+        text("INSERT INTO jobs (title, description, skills_required, experience_required, street, state, country, zipcode, company_name, salary_range, employment_type, application_deadline, bachelors_needed, masters_needed, valid_majors, posted_by) "
+             "VALUES (:title, :description, :skills_required, :experience_required, :street, :state, :country, :zipcode, :company_name, :salary_range, :employment_type, :application_deadline, :bachelors_needed, :masters_needed, :valid_majors, :posted_by)"),
         {"title": job.title, "description": job.description, "skills_required": job.skills_required,
          "experience_required": job.experience_required, "street": job.street, "state": job.state,
          "country": job.country, "zipcode": job.zipcode, "company_name": job.company_name, 
          "salary_range": job.salary_range, "employment_type": job.employment_type,
          "application_deadline": job.application_deadline, "bachelors_needed": job.bachelors_needed,
-         "masters_needed": job.masters_needed, "valid_majors": job.valid_majors}
+         "masters_needed": job.masters_needed, "valid_majors": job.valid_majors,
+         "posted_by": job.posted_by  # Insert the posted_by value provided in the request
+        }
     )
     db.commit()
-    return job
+
+    # Retrieve the newly created job_id
+    new_job_id = result.lastrowid
+
+    # Return the response with the job_id included
+    #return {**job.dict(), "job_id": new_job_id}
+    return {"message": "Job posting successful", "job_id": new_job_id}
+
+
+
+
 
 # Match job to user profile
 @app.get("/match_job/{student_id}")

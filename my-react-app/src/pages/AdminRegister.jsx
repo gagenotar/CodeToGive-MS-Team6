@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api';
 import alpfaLogo from "../img/alpfaLogo.png";
-import RegisterForm from "../components/RegisterForm"
+import AdminRegisterForm from "../components/AdminRegisterForm"
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -22,12 +22,12 @@ const Register = () => {
         // Handle registration logic here
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const student_name = e.target.name.value;
-        const response = await api.post('/students/register', { student_name, email, password });
+        const name = e.target.name.value;
+        const response = await api.post('/job_admin/register', { name, email, password });
         console.log(response.data);
 
         if (response.status === 200) {
-            window.location.href = '/login';
+            window.location.href = '/admin/login';
         } else {
             alert('Registration failed');
         }
@@ -47,7 +47,7 @@ const Register = () => {
           <div className="title">Sign Up</div>
           <img className="logo" src={alpfaLogo} alt="" />
         </div>
-        <RegisterForm
+        <AdminRegisterForm
           fields={fields}
           onSubmit={handleSubmit}
           onChange={handleChange}

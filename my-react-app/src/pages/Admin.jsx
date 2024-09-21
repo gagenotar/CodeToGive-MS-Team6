@@ -4,18 +4,18 @@ import NavBar from '../components/NavBar';
 
 const Admin = () => {
     const [admin, setAdmin] = useState({});
-    const student_id = localStorage.getItem('student_id');
+    const jobadmin_id = localStorage.getItem('jobadmin_id');
 
     useEffect(() => {
         const getAdmin = async () => {
-            const response = await api.get(`/students/${student_id}`);
+            const response = await api.get(`/students/${jobadmin_id}`);
             setAdmin(response.data);
         };
 
-        if (student_id) {
+        if (jobadmin_id) {
             getAdmin();
         }
-    }, [student_id]);
+    }, [jobadmin_id]);
 
     return (
       <div>

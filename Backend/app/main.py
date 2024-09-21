@@ -13,9 +13,19 @@ from dotenv import load_dotenv
 import os
 import cohere
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create FastAPI instance
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can specify the domains you want to allow, e.g., ["http://localhost", "https://example.com"]
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Initialize the database (create tables if not exist)
 Base.metadata.create_all(bind=engine)

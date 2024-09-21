@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "../api";
 import alpfaLogo from "../img/alpfaLogo.png";
-import LoginForm from "../components/LoginForm";
+import AdminLoginForm from "../components/AdminLoginForm";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ const Login = () => {
           <div className="title">Welcome Admin! Login</div>
           <img className="logo" src={alpfaLogo} alt="" />
         </div>
-        <LoginForm
+        <AdminLoginForm
           fields={fields}
           onSubmit={handleSubmit}
           onChange={handleChange}

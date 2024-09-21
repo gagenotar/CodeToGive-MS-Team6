@@ -174,6 +174,24 @@ class DataExtractor:
 
         return " ".join(experience_section)
 
+
+    def extract_skills(self):
+        skills_section = []
+        in_skills_section = False
+        
+        for token in self.doc:
+            if token.text in RESUME_SECTIONS:
+                if token.text == "Skills" or "SKILLS" or "skills":
+                    in_skills_section = True
+                else :
+                    in_skills_section = False
+        
+        if in_skills_section:
+            skills_section.append(token.text)
+
+        return " ".join(skills_section)
+
+
     def extract_position_year(self):
         """
         Extract position and year from a given string.

@@ -26,6 +26,7 @@ class ParseDocumentToJson:
     def get_additional_data(self):
         self.name = DataExtractor(self.clean_data[:30]).extract_names()
         self.experience = DataExtractor(self.clean_data).extract_experience()
+        self.skills = DataExtractor(self.clean_data).extract_skills()
         self.emails = DataExtractor(self.doc_data).extract_emails()
         self.phones = DataExtractor(self.doc_data).extract_phone_numbers()
         self.years = DataExtractor(self.clean_data).extract_position_year()
@@ -47,6 +48,7 @@ class ParseDocumentToJson:
                 {
                     "name": self.name,
                     "experience": self.experience,
+                    "skills": self.skills,
                     "emails": self.emails,
                     "phones": self.phones,
                     "years": self.years,

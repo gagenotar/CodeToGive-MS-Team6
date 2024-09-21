@@ -46,7 +46,6 @@ class Processor:
     def _read_data(self) -> dict:
         data = read_single_pdf(self.input_file_name)
         output = ParseDocumentToJson(data, self.file_type).get_JSON()
-        print(output)
         return output
 
     def _write_json_file(self, data_dict: dict):

@@ -6,23 +6,23 @@
                             "john.doe@email.com"
               ],
               "entities": [
-                            "LinkedIn linkedincom",
-                            "\u2022Wrote",
-                            "XYZ Solutions Anywhere",
+                            "Full Stack Developer",
+                            "Bootstrap",
+                            "Angular Developer",
+                            "TypeScript",
                             "ABC Company Inc",
                             "USA",
-                            "Software Developer",
-                            "Angular Developer",
-                            "SQL",
-                            "TypeScript",
-                            "Mockito\n\u2022Docker\n",
-                            "Hibernate\n\u2022Angular",
-                            "Bootstrap",
                             "selfdirect Committed",
+                            "Bachelor of Science in Computer Science  State University Anywhere",
                             "Java Spring Boot Angular HTML5",
+                            "LinkedIn linkedincom",
+                            "Hibernate\n\u2022Angular",
                             "Java",
-                            "Full Stack Developer",
-                            "Bachelor of Science in Computer Science  State University Anywhere"
+                            "SQL",
+                            "XYZ Solutions Anywhere",
+                            "Software Developer",
+                            "Mockito\n\u2022Docker\n",
+                            "\u2022Wrote"
               ],
               "experience": "",
               "extracted_keywords": [
@@ -288,7 +288,8 @@
                             "SYM": 5,
                             "VERB": 37
               },
+              "skills": "",
               "tri_grams": "[St Anywhere USA, skilled Full Stack, years of experience, experience in Java, Java and Angular, specializing in designing, designing building testing, testing and maintaining, maintaining web applications, web applications Proficient, technologies including Java, including Java Spring, Java Spring Boot, Spring Boot Angular, Boot Angular HTML5, Angular HTML5 CSS3, CSS3 and SQL, SQL Exceptional ability, team and selfdirect, Committed to providing, providing highquality results, results with little, \u2022Java and J2EE, \u2022Spring Boot Spring, Boot Spring MVC, MVC and Hibernate, \u2022JavaScript TypeScript HTML5, TypeScript HTML5 CSS3, CSS3 and Bootstrap, \u2022SQL and NoSQL, NoSQL databases MySQL, databases MySQL MongoDB, \u2022Agile and Scrum, \u2022Git and GitHub, \u2022Junit and Mockito, Stack Java Developer, ABC Company Inc, Inc Anywhere USA, \u2022Developed scalable robust, robust and maintainable, maintainable enterpriselevel applications, applications using Java, Java and Spring, Angular for developing, dynamic and responsive, responsive web frontends, web frontends improving, frontends improving user, improving user experience, applications with MySQL, MySQL and MongoDB, databases to store, store and retrieve, retrieve data efficiently, Agile development team, team to deliver, deliver highquality software, software every sprint, \u2022Created RESTful services, services and APIs, APIs for frontend, frontend and thirdparty, \u2022Wrote unit tests, tests using Junit, Junit and Mockito, Mockito for robust, testing of application, Solutions Anywhere USA, complete software development, software development life, development life cycle, cycle from requirement, analysis to deploy, \u2022Implemented business logic, logic using Java, Java and enhanced, enhanced user interface, interface using Angular, \u2022Developed and maintained, SQL and NoSQL, NoSQL databases implementing, databases implementing complex, implementing complex queries, queries for business, Git for version, control and collaborated, collaborated with team, members via GitHub, \u2022Assisted in troubleshooting, troubleshooting software debugging, debugging and system, Bachelor of Science, Science in Computer, University Anywhere USA, \u2022Oracle Certified Professional, Certified Professional Java, Professional Java SE, \u2022Certified Angular Developer]",
-              "unique_id": "cdf57a65-97d2-4320-b650-fc3e5236d613",
+              "unique_id": "9e70db49-f8e0-4689-a21f-14cb0d105fd3",
               "years": []
 }

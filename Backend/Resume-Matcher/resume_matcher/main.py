@@ -1,7 +1,7 @@
 import os
 
 from run_first import run_first
-from scripts.get_score import get_score
+from scripts.get_score import get_score, custom_test
 from scripts.logger import init_logging_config
 from scripts.utils import find_path, read_json
 
@@ -42,4 +42,4 @@ def process_files(resume, job_description):
     print(f"Processing job description: {job_description}")
 
 
-
+# custom_test()

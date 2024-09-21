@@ -18,8 +18,8 @@ logger.setLevel(logging.INFO)
 # READ_JOB_DESCRIPTION_FROM = os.path.join(cwd, "Data", "Processed", "JobDescription/")
 
 cwd = find_path("Team-6-C2G")
-READ_RESUME_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes/")
-READ_JOB_DESCRIPTION_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription/")
+READ_RESUME_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes\\")
+READ_JOB_DESCRIPTION_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription\\")
 
 def get_score(resume_string, job_description_string):
     """
@@ -60,11 +60,11 @@ def custom_test():
     # To give your custom resume use this code
     resume_dict = read_json(
         READ_RESUME_FROM
-        + "resume_barry_allen_fe.pdf44a91b3b-b553-4765-b6b8-bfe26135f87b.json"
+        + "resume_Justis Nazirbage Resume Summer 2024.pdfafea8a26-c07a-4fa4-89ee-c9f908c8e58a.json"
     )
     job_dict = read_json(
         READ_JOB_DESCRIPTION_FROM
-        + "job_description_job_desc_front_end_engineer.pdf947c72ae-7faf-45fa-86a4-92db51c07b45.json"
+        + "job_description_job_desc_front_end_engineer.pdf8a898565-cd5a-4f89-9d95-b45aff7b909f.json"
     )
     resume_keywords = resume_dict["extracted_keywords"]
     job_description_keywords = job_dict["extracted_keywords"]
@@ -76,5 +76,5 @@ def custom_test():
         print(r.score)
 
 
-if __name__ == "__main__":
-    custom_test()
+# if __name__ == "__main__":
+#     custom_test()

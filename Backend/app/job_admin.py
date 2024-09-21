@@ -36,6 +36,28 @@ def register_job_admin(admin: AdminRegisterModel, db: Session = Depends(get_db))
     return {"message": "Job admin registered successfully"}
 
 
+
+
+# API to fetch job admin details based on jobadmin_id
+@router.get("/job_admin/{jobadmin_id}")
+def get_job_admin(jobadmin_id: int, db: Session = Depends(get_db)):
+    # Fetch job admin from the database using the provided ID
+    job_admin = db.execute(
+        text("SELECT jobadmin_id, name, email FROM job_admin WHERE jobadmin_id = :jobadmin_id"),
+        {"jobadmin_id": jobadmin_id}
+    ).fetchone()
+
+    # If the job admin does not exist, return a 404 error
+    if not job_admin:
+        return JSONResponse(status_code=404, detail="Job Admin not found")
+
+    # Return the job admin details as a dictionary
+    return {
+        "jobadmin_id": job_admin[0],
+        "name": job_admin[1],
+        "email": job_admin[2]
+    }
+
 @router.get("/job_admin/postedby/{jobadmin_id}", response_model=List[JobCreate])
 def get_jobs_posted_by_admin(jobadmin_id: int, db: Session = Depends(get_db)):
     # Fetch jobs by jobadmin_id

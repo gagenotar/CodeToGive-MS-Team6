@@ -22,6 +22,9 @@ from app.database import get_db  # Import DB session from database.py
 
 
 router = APIRouter()
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+co = cohere.Client(COHERE_API_KEY)
+
 
 # Create a job posting
 @router.post("/jobs")
@@ -107,4 +110,117 @@ def get_job(job_id: int, db: Session = Depends(get_db)):
 
     }
 
-# Match job to user profile
+
+
+def parse_job_description(description: str):
+    prompt = f"""
+    Extract the following information from the job description:
+    
+    1. Skills required (comma-separated if more than one)
+    2. Experience required (in years)
+    3. Does it need a Bachelor's degree? (Yes/No)
+    4. Does it need a Master's degree? (Yes/No)
+    
+    Job Description: {description}
+    
+    Format the answer as:
+    Skills: <comma-separated skills>
+    Experience: <experience in years>
+    Bachelor's Degree Required: <Yes/No>
+    Master's Degree Required: <Yes/No>
+    """
+
+    response = co.generate(
+        model='command-xlarge-nightly',
+        prompt=prompt,
+        max_tokens=300,
+        temperature=0.7,
+        stop_sequences=["Bachelor's Degree Required", "Master's Degree Required"]
+    )
+
+    response_text = response.generations[0].text.strip()
+    print("LLM Response: ", response_text)
+    
+    # Default values in case the LLM doesn't return expected output
+    skills = ""
+    experience_required = 0
+    bachelors_needed = 1
+    masters_needed = 0
+    
+    # Split the response by lines and process each part
+    lines = response_text.split('\n')
+    
+    # Updated parsing logic with more flexibility
+    for line in lines:
+        line = line.strip().lower()  # Lowercase and strip for uniformity
+        if "skills" in line:
+            skills = line.split(':')[-1].strip()
+        elif "experience" in line:
+            try:
+                experience_required = int(line.split(':')[-1].strip().split('-')[0])  # Handle range like 6-9 years
+            except ValueError:
+                experience_required = 0  # Fallback to 0 if parsing fails
+        elif "bachelor" in line:
+            if "yes" in line or "required" in line:
+                bachelors_needed = 1
+            else:
+                bachelors_needed = 0
+        elif "master" in line:
+            if "yes" in line:
+                masters_needed = 1
+            else:
+                masters_needed = 0
+
+    return {
+        "skills": skills,
+        "experience_required": experience_required,
+        "bachelors_needed": bachelors_needed,
+        "masters_needed": masters_needed
+    }
+
+
+
+
+
+# Endpoint to parse job description and auto-fill job fields
+@router.post("/jobs/parse")
+def parse_job(job: JobCreate, db: Session = Depends(get_db)):
+    # Use LLM to parse job description
+    parsed_data = parse_job_description(job.description)
+
+
+    print(parsed_data)
+
+    #return 
+    # Insert the parsed data along with other job details into the jobs table
+    db.execute(
+        text("""
+            INSERT INTO jobs (title, description, company_name, salary_range, employment_type, street, state, country, zipcode, skills_required, experience_required, bachelors_needed, masters_needed, posted_by , application_deadline,valid_majors)
+            VALUES (:title, :description, :company_name, :salary_range, :employment_type, :street, :state, :country, :zipcode, :skills, :experience_required, :bachelors_needed, :masters_needed, :posted_by , :application_deadline , :valid_majors)
+        """),
+        {
+            "title": job.title,
+            "description": job.description,
+            "company_name": job.company_name,
+            "salary_range": job.salary_range,
+            "employment_type": job.employment_type,
+            "street": job.street,
+            "state": job.state,
+            "country": job.country,
+            "zipcode": job.zipcode,
+            "skills": parsed_data['skills'],
+            "experience_required": parsed_data['experience_required'],
+            "bachelors_needed": parsed_data['bachelors_needed'],
+            "masters_needed": parsed_data['masters_needed'],
+            "posted_by": job.posted_by,
+            "application_deadline":job.application_deadline,
+            "valid_majors": job.valid_majors
+        }
+    )
+    db.commit()
+
+    return {"message":"Job Parsed and Posted"}
+
+
+
+

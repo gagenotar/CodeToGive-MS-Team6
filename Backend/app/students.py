@@ -171,7 +171,8 @@ def match_job_to_user(student_id: int, db: Session = Depends(get_db)):
     valid_jobs = []
     for job in jobs:
         job_id, title, description, skills_required, experience_required, application_deadline, valid_majors = job
-        valid_majors_list = [major.strip().lower() for major in valid_majors.split(',')]
+        if valid_majors:
+         valid_majors_list = [major.strip().lower() for major in valid_majors.split(',')]
         if major.lower() in valid_majors_list:
             valid_jobs.append(job)
 
@@ -193,7 +194,7 @@ def match_job_to_user(student_id: int, db: Session = Depends(get_db)):
         Skills: {student_skills}
         Experience: {student_experience} years
         
-        Based on the job description and student's profile, return a match score between 0 and 1 and provide reasoning.
+        Based on the job description and student's profile, return a match score between 0 and 1 (just number).
         """
         response = co.generate(
             model='command-xlarge-nightly',

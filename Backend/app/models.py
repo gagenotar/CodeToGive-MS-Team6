@@ -83,8 +83,8 @@ class JobCreate(BaseModel):
     #job_id: str
     title: str
     description: str
-    skills_required: str
-    experience_required: int
+    skills_required: Optional[str]
+    experience_required: Optional[int]
     street: str
     state: str
     country: str
@@ -92,9 +92,9 @@ class JobCreate(BaseModel):
     company_name: str
     salary_range: str
     employment_type: str
-    application_deadline: date  # <-- Use Python's `datetime.date`
-    bachelors_needed: bool
-    masters_needed: bool
+    application_deadline: Optional[date]  # <-- Use Python's `datetime.date`
+    bachelors_needed: Optional[bool]
+    masters_needed: Optional[bool]
     valid_majors: str
     #posted_by: int  # Add this field to track who posted the job
     posted_by: Optional[int]

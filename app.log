@@ -1,4 +1,11 @@
-2024-09-21 12:25:42,283 (run_first.py:43) - INFO: Started to read from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Resumes/
-2024-09-21 12:25:42,283 (run_first.py:49) - ERROR: There are no resumes present in the specified folder.
-2024-09-21 12:25:42,284 (run_first.py:50) - ERROR: Exiting from the program.
-2024-09-21 12:25:42,284 (run_first.py:51) - ERROR: Please add resumes in the C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Resumes/ folder and try again.
+2024-09-21 13:32:15,292 (run_first.py:43) - INFO: Started to read from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Resumes
+2024-09-21 13:32:15,298 (run_first.py:38) - INFO: Deleted old files from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Processed\Resumes
+2024-09-21 13:32:15,299 (run_first.py:47) - INFO: Reading from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Resumes is now complete.
+2024-09-21 13:32:15,299 (run_first.py:56) - INFO: Started parsing the resumes.
+2024-09-21 13:32:16,747 (core.py:65) - INFO: loaded 'en_core_web_md' spaCy language pipeline
+2024-09-21 13:32:20,334 (run_first.py:61) - INFO: Parsing of the resumes is now complete.
+2024-09-21 13:32:20,335 (run_first.py:43) - INFO: Started to read from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\JobDescription
+2024-09-21 13:32:20,337 (run_first.py:38) - INFO: Deleted old files from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\Processed\JobDescription
+2024-09-21 13:32:20,338 (run_first.py:47) - INFO: Reading from C:\Users\jnazi\Documents\GitHub\Team-6-C2G\Backend\Resume-Matcher\Data\JobDescription is now complete.
+2024-09-21 13:32:20,338 (run_first.py:56) - INFO: Started parsing the job_descriptions.
+2024-09-21 13:32:20,750 (run_first.py:61) - INFO: Parsing of the job_descriptions is now complete.

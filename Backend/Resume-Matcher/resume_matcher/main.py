@@ -17,9 +17,9 @@ run_first()
 # )
 
 cwd = find_path("Team-6-C2G")
-PROCESSED_RESUMES_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes/")
+PROCESSED_RESUMES_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes\\")
 PROCESSED_JOB_DESCRIPTIONS_PATH = os.path.join(
-    cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription/"
+    cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription\\"
 )
 
 

@@ -16,11 +16,11 @@ from .utils import read_single_pdf, find_path
 
 cwd = find_path("Team-6-C2G")
 
-READ_RESUME_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Resumes/")
-SAVE_RESUME_TO = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes/")
+READ_RESUME_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Resumes\\")
+SAVE_RESUME_TO = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes\\")
 
-READ_JOB_DESCRIPTION_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "JobDescription/")
-SAVE_JOB_DESCRIPTION_TO = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription/")
+READ_JOB_DESCRIPTION_FROM = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "JobDescription\\")
+SAVE_JOB_DESCRIPTION_TO = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription\\")
 
 
 class Processor:
@@ -46,6 +46,7 @@ class Processor:
     def _read_data(self) -> dict:
         data = read_single_pdf(self.input_file_name)
         output = ParseDocumentToJson(data, self.file_type).get_JSON()
+        print(output)
         return output
 
     def _write_json_file(self, data_dict: dict):

@@ -14,14 +14,14 @@ from scripts.utils import get_filenames_from_dir, find_path
 # )
 
 cwd = find_path("Team-6-C2G")
-RESUMES_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Resumes/")
-JOB_DESCRIPTIONS_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "JobDescription/")
-PROCESSED_RESUMES_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes/")
+RESUMES_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Resumes")
+JOB_DESCRIPTIONS_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "JobDescription")
+PROCESSED_RESUMES_PATH = os.path.join(cwd, "Backend", "Resume-Matcher", "Data", "Processed", "Resumes")
 PROCESSED_JOB_DESCRIPTIONS_PATH = os.path.join(
-    cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription/"
+    cwd, "Backend", "Resume-Matcher", "Data", "Processed", "JobDescription"
 )
 
-
+print(RESUMES_PATH)
 logger = logging.getLogger(__name__)
 
 

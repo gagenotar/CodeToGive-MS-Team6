@@ -146,21 +146,24 @@ class LoginModel(BaseModel):
     email: str
     password: str
 
-# Basic Login API
 @app.post("/login")
 def login(user: LoginModel, db: Session = Depends(get_db)):
     # Check if the user exists
-    existing_user = db.execute(text("SELECT * FROM students WHERE email = :email"), {"email": user.email}).fetchone()
+    existing_user = db.execute(
+        text("SELECT * FROM students WHERE email = :email"),
+        {"email": user.email}
+    ).fetchone()
 
     if not existing_user:
-        return JSONResponse(status_code=404, content="User not found")
+        return JSONResponse(status_code=404, content={"detail": "User not found"})
 
     # Check if the password matches
     if existing_user[3] != user.password:  # Assuming password is the 4th field in the row
-        return JSONResponse(status_code=400, content="Invalid password")
+        return JSONResponse(status_code=400, content={"detail": "Invalid password"})
 
-    # Return success message
-    return {"message": "Login successful"}
+    # Return student_id and success message
+    return {"message": "Login successful", "student_id": existing_user[0]}  # Assuming student_id is the 1st field
+
 
 
 

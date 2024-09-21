@@ -92,7 +92,7 @@ class JobCreate(BaseModel):
     company_name: str
     salary_range: str
     employment_type: str
-    application_deadline: date  # <-- Use Python's `datetime.date`
+    application_deadline: Optional[date]  # <-- Use Python's `datetime.date`
     bachelors_needed: Optional[bool]
     masters_needed: Optional[bool]
     valid_majors: str

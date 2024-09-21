@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import api from "../api";
 import alpfaLogo from "../img/alpfaLogo.png";
 import LoginForm from "../components/LoginForm";
@@ -58,26 +57,5 @@ const Login = () => {
  
   );
 };
-        localStorage.setItem('student_id', student_id);
-
-        if (role === 'admin') {
-            window.location.href = '/admin';
-        } else {
-            window.location.href = '/home'; 
-        }
-    };
-
-    const fields = [
-        { label: 'Email', type: 'text', name: 'email', value: formData.email, onChange: handleChange },
-        { label: 'Password', type: 'password', name: 'password', value: formData.password, onChange: handleChange }
-    ];
-
-    return (
-        <>
-            <h1>Login</h1>
-            <Form fields={fields} onSubmit={handleSubmit} buttonText="login" />
-        </>
-    );
-}
 
 export default Login;

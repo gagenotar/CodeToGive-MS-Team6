@@ -32,4 +32,4 @@ def download_pdf_from_drive(drive_link: str, file_path: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred while downloading the PDF: {str(e)}")
 
-download_pdf_from_drive("https://drive.google.com/file/d/1NYZglzd10wyNYlzkpF2k6uA05HYlJdIw", "Data/test_resume/fixed.pdf")
+# download_pdf_from_drive("https://drive.google.com/file/d/1NYZglzd10wyNYlzkpF2k6uA05HYlJdIw", "Data/test_resume/fixed.pdf")

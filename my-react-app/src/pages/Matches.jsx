@@ -31,8 +31,9 @@ const Matches = () => {
 
     if (loading) {
         return (
-            <div className='container-fluid'>
-                <h1 style={{ margin: 'auto' }}>Loading...</h1>
+            <div className='container-fluid d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
+                <h1>Calculating top matches...</h1>
+                <p>Please wait.</p>
             </div>
         );
     }

@@ -45,24 +45,26 @@ const Events = () => {
     return (
         <div>
             <AdminNavBar />
-            <div className="container my-5">
-                <h1>Create an Event</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="event_name" className="form-label">Event Name</label>
-                        <input type="text" className="form-control" id="event_name" name="event_name" value={event.event_name} onChange={handleChange} required />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="event_type" className="form-label">Event Type</label>
-                        <input type="text" className="form-control" id="event_type" name="event_type" value={event.event_type} onChange={handleChange} required />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="description" className="form-label">Description</label>
-                        <textarea className="form-control" id="description" name="description" value={event.description} onChange={handleChange} required />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
-                {message && <p className="mt-3">{message}</p>}
+            <div className='events-wrapper'>
+                <div className="card m-5">
+                    <h1>Create an Event</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="event_name" className="form-label">Event Name</label>
+                            <input type="text" className="form-control" id="event_name" name="event_name" value={event.event_name} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="event_type" className="form-label">Event Type</label>
+                            <input type="text" className="form-control" id="event_type" name="event_type" value={event.event_type} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Description</label>
+                            <textarea className="form-control" id="description" name="description" value={event.description} onChange={handleChange} required />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </form>
+                    {message && <p className="mt-3">{message}</p>}
+                </div>
             </div>
         </div>
     );

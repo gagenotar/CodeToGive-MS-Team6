@@ -1,9 +1,13 @@
 import React from 'react';
+import logo from '../img/alpfaLogo.png';
+import '../styles/AdminNavBar.css';
 
 const AdminNavBar = () => {
-
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg custom-navbar">
+            <a className="navbar-brand" href="/admin">
+                <img src={logo} alt="Logo" className="navbar-logo" />
+            </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

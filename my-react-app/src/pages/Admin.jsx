@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 import AdminNavBar from '../components/AdminNavBar';
+import '../styles/Admin.css';
 
 const Admin = () => {
     const [admin, setAdmin] = useState({});
@@ -73,7 +74,7 @@ const Admin = () => {
                         </div>
                         <div className='row'>
                             <div>
-                                <a href={`participants/${event.event_id}`} className="btn btn-primary mx-1">View Participants</a>
+                                <a href={`participants/${event.event_id}`} className="btn disabled btn-primary mx-1">View Participants</a>
                             </div>
                         </div>
                     </div>
@@ -86,8 +87,10 @@ const Admin = () => {
       <div>
         <AdminNavBar />
         <div className='container-fluid'>
-            <h1>Home</h1>
-            <p>Welcome to the admin page, {admin.name}</p>
+            <div className='container-fluid'>
+                <h1>Home</h1>
+                <p>Welcome to the admin page, {admin.name}</p>
+            </div>
             <div className="container" id='home-wrapper'>
                 <div className="row mb-3 justify-content-center">
                     <div className="col">

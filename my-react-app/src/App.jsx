@@ -10,6 +10,7 @@ import Admin from "./pages/Admin"
 import Jobs from "./pages/Jobs"
 import Events from "./pages/Events"
 import Matches from "./pages/Matches"
+import LandingPage from "./pages/LandingPage"
 
 function Logout() {
   localStorage.clear()
@@ -30,6 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<RegisterAndLogout />}/>
         <Route path="/logout" element={<Logout />}/>

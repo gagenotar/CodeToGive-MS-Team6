@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import AdminNavBar from '../components/AdminNavBar';
 
 const Matches = () => {
     const { id } = useParams();
@@ -15,8 +16,8 @@ const Matches = () => {
                 const jobResponse = await axios.get(`/api/jobs/${id}`);
                 setJobDetails(jobResponse.data);
                 
-                const candidatesResponse = await axios.get(`/api/jobs/${id}/candidates`);
-                setCandidates(candidatesResponse.data);
+                // const candidatesResponse = await axios.get(`/api/jobs/${id}/candidates`);
+                // setCandidates(candidatesResponse.data);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -32,6 +33,7 @@ const Matches = () => {
 
     return (
         <div>
+            <AdminNavBar />
             <h1>Job Details</h1>
             {jobDetails && (
                 <div>

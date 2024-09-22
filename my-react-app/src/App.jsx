@@ -9,6 +9,7 @@ import RegisterAdmin from "./pages/AdminRegister"
 import Admin from "./pages/Admin"
 import Jobs from "./pages/Jobs"
 import Events from "./pages/Events"
+import Matches from "./pages/Matches"
 
 function Logout() {
   localStorage.clear()
@@ -39,6 +40,7 @@ function App() {
         <Route path="/admin" element={<Admin />}/>
         <Route path="/jobs" element={<Jobs />}/>
         <Route path="/events" element={<Events />}/>
+        <Route path="/matches/:id" element={<Matches />}/>
       </Routes>
     </BrowserRouter>
   )

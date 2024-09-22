@@ -27,7 +27,7 @@ const Admin = () => {
     const displayJobs = () => {
         return jobs.map((job) => {
             return (
-                <div className="card mt-3" key={job.id}>
+                <div className="card mt-3" key={job.job_id}>
                     <div className="card-body">
                         <h5 className="card-title">{job.title}</h5>
                         <p className="card-text">{job.description}</p>
@@ -39,7 +39,7 @@ const Admin = () => {
                         </div>
                         <div className='row'>
                             <div>
-                                <a href={`matches/${job.id}`} className="btn btn-primary mx-1">View Matches</a>
+                                <a href="matches/1" className="btn btn-primary mx-1">View Matches</a>
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,8 @@ co = cohere.Client(COHERE_API_KEY)
 def create_job(job: JobCreate, db: Session = Depends(get_db)):
     result = db.execute(
         text("INSERT INTO jobs (title, description, skills_required, experience_required, street, state, country, zipcode, company_name, salary_range, employment_type, application_deadline, bachelors_needed, masters_needed, valid_majors, posted_by) "
-             "VALUES (:title, :description, :skills_required, :experience_required, :street, :state, :country, :zipcode, :company_name, :salary_range, :employment_type, :application_deadline, :bachelors_needed, :masters_needed, :valid_majors, :posted_by)"),
+             "VALUES (:title, :description, :skills_required, :experience_required, :street, :state, :country, :zipcode, :company_name, :salary_range, :employment_type, :application_deadline, :bachelors_needed, :masters_needed, :valid_majors, :posted_by)"
+             "RETURNING job_id"),
         {"title": job.title, "description": job.description, "skills_required": job.skills_required,
          "experience_required": job.experience_required, "street": job.street, "state": job.state,
          "country": job.country, "zipcode": job.zipcode, "company_name": job.company_name, 

@@ -4,7 +4,12 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
+import LoginAdmin from "./pages/AdminLogin"
+import RegisterAdmin from "./pages/AdminRegister"
 import Admin from "./pages/Admin"
+import Jobs from "./pages/Jobs"
+import Events from "./pages/Events"
+import Matches from "./pages/Matches"
 
 function Logout() {
   localStorage.clear()
@@ -16,16 +21,26 @@ function RegisterAndLogout() {
   return <Register />
 }
 
+function RegisterAndLogoutAdmin() {
+  localStorage.clear()
+  return <RegisterAdmin />
+}
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />}/>
-        <Route path="/logout" element={<Logout />}/>
         <Route path="/register" element={<RegisterAndLogout />}/>
+        <Route path="/logout" element={<Logout />}/>
         <Route path="/home" element={<Home />}/>
-        <Route path="/admin" element={<Admin />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/login/admin" element={<LoginAdmin />}/>
+        <Route path="/register/admin" element={<RegisterAndLogoutAdmin />}/>
+        <Route path="/admin" element={<Admin />}/>
+        <Route path="/jobs" element={<Jobs />}/>
+        <Route path="/events" element={<Events />}/>
+        <Route path="/matches/:id" element={<Matches />}/>
       </Routes>
     </BrowserRouter>
   )

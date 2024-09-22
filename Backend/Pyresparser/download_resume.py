@@ -6,7 +6,7 @@ punctuations = [' ', ':', '.']
 
 def download_resume(url: str, file_name=None):
     if not file_name:
-        file_name = file_name or f"{datetime.now()}
+        file_name = file_name or str(datetime.now())
         for p in punctuations:
             file_name = file_name.replace(p, '-')
         file_name += ".pdf"
@@ -29,4 +29,4 @@ def download_pdf_from_drive(drive_link: str, file_path: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred while downloading the PDF: {str(e)}")
 
-# download_pdf_from_drive("https://drive.google.com/file/d/1NYZglzd10wyNYlzkpF2k6uA05HYlJdIw/view?usp=drive_link", "Data/test_resume/hello.pdf")
+# download_pdf_from_drive("https://drive.google.com/file/d/1NYZglzd10wyNYlzkpF2k6uA05HYlJdIw", "Data/test_resume/hello.pdf")

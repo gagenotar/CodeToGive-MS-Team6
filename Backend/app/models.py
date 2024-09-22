@@ -40,6 +40,7 @@ class Student(Base):
     state = Column(String(100))
     country = Column(String(100))
     zipcode = Column(String(20))
+    resume_link = Column(String(255)) # New column for resume link
 
 class Job(Base):
     __tablename__ = "jobs"
@@ -77,6 +78,7 @@ class StudentCreate(BaseModel):
     state: Optional[str] = None
     country: Optional[str] = None
     zipcode: Optional[str] = None
+    resume_link: Optional[str] = None
 
 # Job creation model (now using `datetime.date` instead of SQLAlchemy's `Date`)
 class JobCreate(BaseModel):
@@ -112,6 +114,7 @@ class StudentUpdate(BaseModel):
     state: Optional[str] = None
     country: Optional[str] = None
     zipcode: Optional[str] = None
+    resume_link: Optional[str] = None
 
 
 

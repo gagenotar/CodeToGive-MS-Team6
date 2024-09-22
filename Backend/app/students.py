@@ -13,6 +13,10 @@ from sqlalchemy.orm import Session
 from app.models import * # Import models from models.py
 from app.database import get_db  # Import DB session from database.py
 from fastapi import APIRouter, Depends, HTTPException  # Import APIRouter here
+from fastapi import BackgroundTasks
+import requests
+from Pyresparser.resume_parser_v2 import parse_pdf
+from Pyresparser.resume_parser_v2 import download_pdf_from_drive
 
 
 router = APIRouter()
@@ -57,7 +61,8 @@ def get_students(db: Session = Depends(get_db)):
             "street": student[9] or "No street provided",  # Handle NULL with a default value
             "state": student[10] or "No state provided",  # Handle NULL with a default value
             "country": student[11] or "No country provided",  # Handle NULL with a default value
-            "zipcode": student[12] or "No zipcode provided"  # Handle NULL with a default value
+            "zipcode": student[12] or "No zipcode provided",  # Handle NULL with a default value
+            "resume_link": student[13] or "No resume provided"
         }
         for student in students
     ]
@@ -90,6 +95,8 @@ def update_student(student_id: int, student: StudentUpdate, db: Session = Depend
         update_fields["country"] = student.country
     if student.zipcode is not None:
         update_fields["zipcode"] = student.zipcode
+    if student.resume_link is not None:
+        update_fields["resume_link"] = student.resume_link
 
     # If no fields are provided for update, return error
     if not update_fields:
@@ -132,9 +139,58 @@ def get_student(student_id: int, db: Session = Depends(get_db)):
         "street": student[9] if student[9] is not None else "",
         "state": student[10] if student[10] is not None else "",
         "country": student[11] if student[11] is not None else "",
-        "zipcode": student[12] if student[12] is not None else ""
+        "zipcode": student[12] if student[12] is not None else "",
+        "resume_link": student[13] if student[13] is not None else ""
     }
 
+@router.post("/students/upload_resume/{student_id}")
+def upload_resume(student_id: int, resume_link: str, db: Session = Depends(get_db)):
+    student = db.execute(text("SELECT * FROM students WHERE student_id = :student_id"), {"student_id": student_id}).fetchone()
+    if not student:
+        return JSONResponse(status_code=404, content={"message": "Student not found"})
+    
+    # Update the student's resume link
+    db.execute(
+        text("UPDATE students SET resume_link = :resume_link WHERE student_id = :student_id"),
+        {"resume_link": resume_link, "student_id": student_id}
+    )
+    db.commit()
+
+    return {"message": "Resume link updated successfully"}
+
+@router.post("/parse_resume")
+async def parse_resume(resume_link: str, student_id: int, db: Session = Depends(get_db)):
+    # Define paths
+    temp_pdf_path = 'temp_resume.pdf'
+    output_json_path = 'processed_resume.json'
+    
+    # Download the PDF
+    download_pdf_from_drive(resume_link, temp_pdf_path)
+
+    # Parse the PDF
+    parsed_data = parse_pdf(temp_pdf_path)
+
+    # Update the database with parsed data
+    try:
+        db.execute(
+            text("""
+                UPDATE students 
+                SET skills = :skills, experience = :experience, highest_education_level = :degree
+                WHERE student_id = :student_id
+            """),
+            {
+                "skills": parsed_data['skills'],
+                "experience": parsed_data['experience'],
+                "degree": parsed_data['degree'],
+                "student_id": student_id
+            }
+        )
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"An error occurred while updating the database: {str(e)}")
+
+    return {"message": "Resume parsed and database updated successfully"}
 
 @router.get("/match_job/{student_id}")
 def match_job_to_user(student_id: int, db: Session = Depends(get_db)):

@@ -21,23 +21,16 @@ const Login = () => {
     // Handle registration logic here
     const email = e.target.email.value;
     const password = e.target.password.value;
-    var response = await api.post("/login/", { email, password });
+    console.log(email + " " + password);
+    var response = await api.post("students/login/", { email, password });
     console.log(response.data);
 
     // Here we should parse the student_id from the response like so:
     const student_id = response.data.student_id;
-
-    // We should also parse the role from the response like so:
-    const role = response.data.role || 'student';
-
     localStorage.setItem("student_id", student_id);
-    localStorage.setItem("role", role);
 
-    if (role === 'student') {
-      window.location.href = "/home";
-    } else {
-      window.location.href = "/admin";
-    }
+    window.location.href = "/home";
+
   };
 
   const fields = {

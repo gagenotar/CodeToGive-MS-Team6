@@ -20,6 +20,27 @@ router = APIRouter()
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 co = cohere.Client(COHERE_API_KEY)
 
+
+
+@router.post("/students/login")
+def login(user: LoginModel, db: Session = Depends(get_db)):
+    # Check if the user exists
+    existing_user = db.execute(
+        text("SELECT * FROM students WHERE email = :email"),
+        {"email": user.email}
+    ).fetchone()
+
+    if not existing_user:
+        return JSONResponse(status_code=404, content={"detail": "User not found"})
+
+    # Check if the password matches
+    if existing_user[3] != user.password:  # Assuming password is the 4th field in the row
+        return JSONResponse(status_code=400, content={"detail": "Invalid password"})
+
+    # Return student_id and success message
+    return {"message": "Login successful", "student_id": existing_user[0]}  # Assuming student_id is the 1st field
+
+
 # Register a new student
 @router.post("/students/register")
 def create_student(student: StudentRegister, db: Session = Depends(get_db)):

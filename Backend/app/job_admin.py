@@ -133,6 +133,17 @@ def match_student_to_job(job_id: int, db: Session = Depends(get_db)):
     """
 
 
+
+#     query = """
+#     SELECT student_id, student_name, skills, experience, highest_education_level, major
+#     FROM students
+#     WHERE (
+#         (:bachelors_needed = 0 OR (highest_education_level = 'Bachelors' AND :bachelors_needed = 1))
+#         OR (:masters_needed = 0 OR (highest_education_level = 'Masters' AND :masters_needed = 1))
+# )
+#     """
+
+
     students = db.execute(text(query), {
         "experience_required": experience_required,
         "bachelors_needed": bachelors_needed,

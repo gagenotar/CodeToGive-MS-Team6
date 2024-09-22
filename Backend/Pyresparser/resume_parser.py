@@ -18,7 +18,7 @@ def find_path(folder_name):
 
 cwd = find_path('Backend')
 resume_folder = os.path.join(cwd, 'Pyresparser', 'Data', 'Resumes\\')
-
+all_data = []
 for resume_file in os.listdir(resume_folder) :
     resume_path = os.path.join(resume_folder, resume_file)
 
@@ -26,12 +26,10 @@ for resume_file in os.listdir(resume_folder) :
         try:
             data = ResumeParser(resume_path).get_extracted_data()
             data_dict = {
-                'name' : data.get('name'),
                 'skills' : data.get('skills'),
                 'experience' : data.get('experience'),
-                'degree' : data.get('degree'),
-                'total_experience' : data.get('total_experience')
             }
+            all_data.append(data_dict)
 
         except Exception as e:
             print(f"Error ocurred while parsing resume: {str(e)}")
@@ -39,6 +37,6 @@ for resume_file in os.listdir(resume_folder) :
 output_file = os.path.join(cwd, 'Pyresparser', 'processed_resume.json')
 
 with open(output_file, 'w', encoding='utf-8') as json_file :
-    json.dump(data_dict, json_file, ensure_ascii=False, indent=4)
+    json.dump(all_data, json_file, ensure_ascii=False, indent=4)
 
 print(f'Data has been saved to {output_file}')

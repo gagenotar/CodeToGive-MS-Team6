@@ -133,3 +133,13 @@ class AdminRegisterModel(BaseModel):
     name: str
     email: str
     password: str
+
+
+
+# Pydantic model for the response
+class EventResponse(BaseModel):
+    event_id: int
+    event_name: str
+    event_type: str
+    description: str
+    sponsor_id: int

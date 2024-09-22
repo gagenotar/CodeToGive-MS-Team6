@@ -33,7 +33,7 @@ def create_student(student: StudentRegister, db: Session = Depends(get_db)):
     except Exception as e:
         if "Duplicate entry" in str(e):
             return JSONResponse(status_code=400, content="Email already registered")
-        return JSONResponse(status_code=500, content="An error occurred")
+        return JSONResponse(status_code=500, content="Email already registered")
 
 # GET endpoint to retrieve all students
 @router.get("/students", response_model=List[StudentCreate])

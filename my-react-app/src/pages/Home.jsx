@@ -1,79 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import api from '../api';
-import NavBar from '../components/NavBar';
-import '../styles/Home.css';
+import React, { useState, useEffect } from "react";
+import api from "../api";
+import NavBar from "../components/NavBar";
+import "../styles/home.css";
+import StudentPublicProfile from "../components/StudentPublicProfile";
+import Card from "react-bootstrap/Card";
+import Nav from "react-bootstrap/Nav";
 
 const Home = () => {
+  const [student, setStudent] = useState({});
+  const student_id = localStorage.getItem("student_id");
+  const [activeTab, setActiveTab] = useState("#overview");
+  const background_color = "#e33940";
+  const hover_color = "#820000";
+  useEffect(() => {
+    const getStudent = async () => {
+      const response = await api.get(`/students/${student_id}`);
+      setStudent(response.data);
+    };
 
-    const [student, setStudent] = useState({});
-    const student_id = localStorage.getItem('student_id');
+    if (student_id) {
+      getStudent();
+    }
+  }, [student_id]);
 
-    useEffect(() => {
-        const getStudent = async () => {
-            const response = await api.get(`/students/${student_id}`);
-            setStudent(response.data);
-        };
+  const handleTabClick = (eventKey) => {
+    setActiveTab(eventKey);
+  };
 
-        if (student_id) {
-            getStudent();
-        }
-    }, [student_id]);
-
-    return (
-      <div>
-        <NavBar />
+  return (
+    <>
+      <NavBar />
+      <div className="home-introduction">
         <h1>Home</h1>
         <p>Welcome to the home page, {student.student_name}</p>
-        <div class="container" id='home-wrapper'>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Profile</h5>
-                            {student && (
-                                <div>
-                                    <p>{student.student_name}</p>
-                                    <p>{student.email}</p>
-                                    <p>Experience Level: {student.experience}</p>
-                                    <p>{student.major}</p>
-                                    <p>{student.university}</p>
-                                </div>
-                            )}
-                            <a href="/profile" class="btn btn-primary">View Profile</a>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Matched Jobs</h5>
-                            <p class="card-text">List of matched jobs</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Notification</h5>
-                            <p class="card-text">List of notifications</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3 justify-content-center">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Events</h5>
-                            <p class="card-text">List of events</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
       </div>
-      )
-}
+      <style type="text/css">
+        {`
+  .nav-pills .nav-link{
+    color: #fff;
+    background-color: ${background_color};
+    border-color: ${background_color};
 
-export default Home
+  }
+
+  .nav-pills .nav-link.active{
+    color: #fff;
+    background-color: ${hover_color};
+  }
+
+  .nav-pills .nav-link:hover {
+    background-color: ${hover_color};
+  }
+
+  }
+    `}
+      </style>
+
+      <Card>
+        <Card.Header>
+          <Nav
+            variant="pills"
+            defaultActiveKey="#first"
+            onSelect={handleTabClick}
+            className="center"
+          >
+            <Nav.Item variant="red">
+              <Nav.Link eventKey="#overview" className="primary">
+                Overview
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="#matched-jobs" className="primary">
+                Matched Jobs
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="#notifications">Notifcations</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="#event">Events</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Card.Header>
+        {activeTab == "#overview" && <StudentPublicProfile student={student} />}
+      </Card>
+    </>
+  );
+};
+
+export default Home;

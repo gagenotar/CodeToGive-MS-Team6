@@ -1,7 +1,18 @@
-#home-wrapper {
-    background-color: aliceblue;
-    color: white;
-    padding: 20px;
+
+
+
+.center{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.nav-item{
+    width: 140px;
     text-align: center;
-    border-radius: 5px;
+}
+
+.home-introduction{
+    text-align: center;
+    margin-top: 25px;
 }

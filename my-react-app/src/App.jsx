@@ -6,6 +6,8 @@ import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 import Admin from "./pages/Admin"
 
+
+
 function Logout() {
   localStorage.clear()
   return <Navigate to="/login" />

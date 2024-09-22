@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "node-sass": "^9.0.0",
+    "react-bootstrap": "^2.10.4"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.79.3"
+  }
+}

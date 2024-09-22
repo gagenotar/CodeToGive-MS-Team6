@@ -5,11 +5,13 @@ from datetime import datetime
 punctuations = [' ', ':', '.']
 
 def download_resume(url: str, file_name=None):
-    file_name = file_name or f"{datetime.now()}.pdf"
-    for p in punctuations:
-        file_name = file_name.replace(p, '-')
+    if not file_name:
+        file_name = file_name or f"{datetime.now()}
+        for p in punctuations:
+            file_name = file_name.replace(p, '-')
+        file_name += ".pdf"
     try:
-        with open(f"resumes/{file_name}", "wb") as file:
+        with open(f"Data/test_resume/{file_name}", "wb") as file:
             file.write(requests.get(url, timeout=10).content)
     except:
         return False
@@ -27,4 +29,4 @@ def download_pdf_from_drive(drive_link: str, file_path: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred while downloading the PDF: {str(e)}")
 
-download_resume("https://drive.google.com/file/d/1NYZglzd10wyNYlzkpF2k6uA05HYlJdIw/view?usp=drive_link")
+# download_pdf_from_drive("https://drive.google.com/file/d/1NYZglzd10wyNYlzkpF2k6uA05HYlJdIw/view?usp=drive_link", "Data/test_resume/hello.pdf")

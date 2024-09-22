@@ -143,3 +143,11 @@ class EventResponse(BaseModel):
     event_type: str
     description: str
     sponsor_id: int
+
+
+#Pydantic model for event creation
+class EventCreate(BaseModel):
+    event_name: str
+    event_type: str
+    description: str
+    sponsor_id: int  # Sponsor ID, referring to the sponsor attending the event

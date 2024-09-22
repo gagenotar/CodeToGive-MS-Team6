@@ -224,4 +224,3 @@ def parse_job(job: JobCreate, db: Session = Depends(get_db)):
 
 
 
-

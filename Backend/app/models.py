@@ -80,7 +80,7 @@ class StudentCreate(BaseModel):
 
 # Job creation model (now using `datetime.date` instead of SQLAlchemy's `Date`)
 class JobCreate(BaseModel):
-    #job_id: str
+    job_id: int
     title: str
     description: str
     skills_required: Optional[str]
@@ -133,3 +133,13 @@ class AdminRegisterModel(BaseModel):
     name: str
     email: str
     password: str
+
+
+
+# Pydantic model for the response
+class EventResponse(BaseModel):
+    event_id: int
+    event_name: str
+    event_type: str
+    description: str
+    sponsor_id: int

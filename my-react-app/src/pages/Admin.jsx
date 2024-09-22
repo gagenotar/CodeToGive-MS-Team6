@@ -39,7 +39,7 @@ const Admin = () => {
                         </div>
                         <div className='row'>
                             <div>
-                                <a href="matches/1" className="btn btn-primary mx-1">View Matches</a>
+                                <a href={`matches/${job.job_id}`} className="btn btn-primary mx-1">View Matches</a>
                             </div>
                         </div>
                     </div>

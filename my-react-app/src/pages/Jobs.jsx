@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import api from '../api';
 import AdminNavBar from '../components/AdminNavBar';
 
@@ -20,7 +20,7 @@ const Jobs = () => {
         masters_needed: false,
         valid_majors: '',
         posted_by: 0,
-        posted_at: ''
+        posted_at: '' // Ensure this is a valid datetime string
     });
 
     const [message, setMessage] = useState('');
@@ -29,15 +29,16 @@ const Jobs = () => {
         const { name, value, type, checked } = e.target;
         setJob({
             ...job,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: type === 'checkbox' ? checked : (name === 'experience_required' || name === 'posted_by' ? parseInt(value) : value)
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(job); // Log the job object to verify its structure
         try {
             const response = await api.post('/jobs', job);
-            if (response.status === 201) {
+            if (response.status === 200) {
                 setMessage('Job posted successfully!');
             } else {
                 setMessage('Failed to post job.');
@@ -64,10 +65,6 @@ const Jobs = () => {
                     <div className="mb-3">
                         <label htmlFor="skills_required" className="form-label">Skills Required</label>
                         <input type="text" className="form-control" id="skills_required" name="skills_required" value={job.skills_required} onChange={handleChange} required />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="experience_required" className="form-label">Experience Required</label>
-                        <input type="number" className="form-control" id="experience_required" name="experience_required" value={job.experience_required} onChange={handleChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="street" className="form-label">Street</label>
@@ -112,6 +109,10 @@ const Jobs = () => {
                     <div className="mb-3">
                         <label htmlFor="valid_majors" className="form-label">Valid Majors</label>
                         <input type="text" className="form-control" id="valid_majors" name="valid_majors" value={job.valid_majors} onChange={handleChange} required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="experience_required" className="form-label">Experience Required</label>
+                        <input type="number" className="form-control" id="experience_required" name="experience_required" value={job.experience_required} onChange={handleChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="posted_by" className="form-label">Posted By</label>

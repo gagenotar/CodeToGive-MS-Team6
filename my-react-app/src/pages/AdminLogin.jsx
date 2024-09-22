@@ -25,8 +25,7 @@ const Login = () => {
     console.log(response.data);
 
     // Here we should parse the jobadmin_id from the response like so:
-    // const jobadmin_id = response.data.job_admin_id;
-    const jobadmin_id = 1;
+    const jobadmin_id = response.data.job_admin_id || 1;
     localStorage.setItem("jobadmin_id", jobadmin_id);
     
     window.location.href = "/admin";

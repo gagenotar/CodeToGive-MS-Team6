@@ -3,7 +3,9 @@ import api from '../api';
 import AdminNavBar from '../components/AdminNavBar';
 
 const Jobs = () => {
+    const jobadmin_id = parseInt(localStorage.getItem('jobadmin_id'), 10);
     const [job, setJob] = useState({
+        job_id: 0,
         title: '',
         description: '',
         skills_required: '',
@@ -19,8 +21,8 @@ const Jobs = () => {
         bachelors_needed: false,
         masters_needed: false,
         valid_majors: '',
-        posted_by: 0,
-        posted_at: '' // Ensure this is a valid datetime string
+        posted_by: jobadmin_id,
+        posted_at: ''
     });
 
     const [message, setMessage] = useState('');
@@ -40,6 +42,26 @@ const Jobs = () => {
             const response = await api.post('/jobs', job);
             if (response.status === 200) {
                 setMessage('Job posted successfully!');
+                // Clear the form
+                setJob({
+                    job_id: 0,
+                    title: '',
+                    description: '',
+                    skills_required: '',
+                    experience_required: 0,
+                    street: '',
+                    state: '',
+                    country: '',
+                    zipcode: '',
+                    company_name: '',
+                    salary_range: '',
+                    employment_type: '',
+                    application_deadline: '',
+                    bachelors_needed: false,
+                    masters_needed: false,
+                    valid_majors: '',
+                    posted_by: jobadmin_id,
+                });
             } else {
                 setMessage('Failed to post job.');
             }
@@ -111,12 +133,8 @@ const Jobs = () => {
                         <input type="text" className="form-control" id="valid_majors" name="valid_majors" value={job.valid_majors} onChange={handleChange} required />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="experience_required" className="form-label">Experience Required</label>
+                        <label htmlFor="experience_required" className="form-label">Experience Level Required</label>
                         <input type="number" className="form-control" id="experience_required" name="experience_required" value={job.experience_required} onChange={handleChange} required />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="posted_by" className="form-label">Posted By</label>
-                        <input type="number" className="form-control" id="posted_by" name="posted_by" value={job.posted_by} onChange={handleChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="posted_at" className="form-label">Posted At</label>

@@ -11,14 +11,14 @@ const Matches = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchJobDetails = async () => {
+        const fetchDetails = async () => {
             try {
                 const jobResponse = await api.get(`/jobs/${id}`);
                 console.log(jobResponse.data);
                 setJobDetails(jobResponse.data);
                 
-                // const candidatesResponse = await api.get(`/api/jobs/${id}/candidates`);
-                // setCandidates(candidatesResponse.data);
+                const candidatesResponse = await api.get(`/job_admin/match_student/${id}`);
+                setCandidates(candidatesResponse.data);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -26,12 +26,33 @@ const Matches = () => {
             }
         };
 
-        fetchJobDetails();
+        fetchDetails();
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) {
+        return (
+            <div className='container-fluid'>
+                <h1 style={{ margin: 'auto' }}>Loading...</h1>
+            </div>
+        );
+    }
     if (error) return <div>Error: {error}</div>;
 
+    const notifyCandidate = async () => {
+        try {
+            // const response = await api.post('/job_admin/notify_student', { student_id, job_id: id });
+            const response = { status: 200 };
+            console.log(response.data);
+            if (response.status === 200) {
+                alert('Notification sent successfully!');
+            } else {            
+                alert('Failed to send notification.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Failed to send notification.');
+        }
+    };
 
     const fakeCandidates = [
         { id: 1, name: 'John Doe', email: 'john.doe@example.com', matchPercentage: 95 },
@@ -40,7 +61,7 @@ const Matches = () => {
         { id: 4, name: 'Bob Brown', email: 'bob.brown@example.com', matchPercentage: 80 },
     ];
 
-    const sortedCandidates = fakeCandidates.sort((a, b) => b.matchPercentage - a.matchPercentage);
+    const sortedCandidates = candidates ? candidates.sort((a, b) => b.match_score - a.match_score) : fakeCandidates.sort((a, b) => b.matchPercentage - a.matchPercentage);
 
     return (
         <div>
@@ -59,13 +80,24 @@ const Matches = () => {
                         </div>
                     </div>
                 )}
-                <h1 className="mt-4">Candidate Matches</h1>
+                <h1 className="mt-4">Top Matches</h1>
                 {candidates.length > 0 ? (
                     <ul className="list-group">
                         {candidates.map(candidate => (
-                            <li key={candidate.id} className="list-group-item">
-                                <h3>{candidate.name}</h3>
-                                <p>{candidate.experience}</p>
+                            <li key={candidate.student_id} className="list-group-item">
+                                <div className='row'>
+                                    <div className='col'>
+                                        <h3>{candidate.student_name}</h3>
+                                    </div>
+                                    <div className='col align-items-center'>
+                                        <a href="#" onClick={() => notifyCandidate()} className="btn btn-primary" style={{ width: '100%' }}>Notify</a>                                        
+                                    </div>
+                                </div>
+                                <p>Match score: {candidate.match_score}</p>
+                                <p>Experience level: {candidate.experience}</p>
+                                <p>{candidate.highest_education_level}</p>
+                                <p>{candidate.major}</p>
+                                <p>{candidate.skills}</p>
                             </li>
                         ))}
                     </ul>

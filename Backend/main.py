@@ -17,7 +17,7 @@ load_dotenv()
 # Create FastAPI instance
 app = FastAPI()
 
-# Add CORS middleware
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # You can specify the domains you want to allow, e.g., ["http://localhost", "https://example.com"]

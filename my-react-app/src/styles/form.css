@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+a{
+  text-decoration: none;
+}
+:root {
+  --background-color: #404040;
+  --red: #e33940;
+}
+
+.background-color {
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  height: auto;
+}
+
+.title {
+  color: white;
+}
+
+.form-subtitle {
+  color: black;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.form-header,
+.background-color {
+  width: 100vw;
+}
+
+.form-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  padding: 25px 25px 25px 0px;
+}
+
+.form-header>.title{
+    padding-left:10px;
+    font-size: clamp(25px,3.125rem,3.125rem);
+    align-self: center;
+    max-width:220px;
+    width:auto;
+    text-align: center;
+
+}
+
+.logo {
+  width: 175px;
+  height: 175px;
+}
+
+.form-submission {
+  width: min(100%, 900px);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+    
+  border-radius: 60px 60px 0px 0px;
+  align-items: center;
+  min-height: 100vh;
+  height: auto;
+  gap:35px;
+}
+
+.form-submission > :first-child {
+
+  margin-top: 100px; 
+}
+
+
+.btn-form {
+ 
+  height: 50px;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--red);
+  color: white;
+  font-size: 25px;
+  font-weight: 20;
+}
+
+
+
+.btn-form, .subtitle-input-pair{
+     width: 220px;
+}
+.btn-form:hover{
+    background-color: #b11b20;
+}
+
+.subtitle-input-pair>input{
+    width:100%;
+    height:35px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5); /* Updated drop shadow */
+    border-radius: 10px;
+    border: none;
+    padding: 7.5px;
+}
+
+.subtitle-input-pair > input::placeholder {
+  padding-left: .5px; 
+}
+
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+}
+
+.sign-up,.sign-in {
+  color: var(--red);
+  font-weight: bold;
+}
+
+
+.sign-up:hover, .sign-in:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.subtitle-input-pair {
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+
+}

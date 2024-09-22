@@ -1,14 +1,13 @@
 import React from 'react';
-import Typed from 'react-typed';
-import '../styles/LandingPage.css'; // Import the CSS file
+import '../styles/LandingPage.css';
+import { ReactTyped } from "react-typed";
 
 const LandingPage = () => {
     return (
         <div className="landing-page">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
+            <nav className="navbar navbar-expand-lg custom-navbar">
                 <a className="navbar-brand" href="/">
                     <img src="/src/img/alpfaLogo.png" alt="Logo" className="navbar-logo" />
-                    ALPFA Power
                 </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -25,21 +24,24 @@ const LandingPage = () => {
                 </div>
             </nav>
             <header className="header text-center">
-                <h1>Welcome to ALPFA Power</h1>
-                <p>Connecting Latino Leaders for Impact</p>
-                <p>
-                    Our platform provides{' '}
-                    <Typed
-                        strings={[
-                            'personalized connections to jobs.',
-                            'tailored recommendations for events.',
-                            'a streamlined hiring process.',
-                        ]}
-                        typeSpeed={40}
-                        backSpeed={50}
-                        loop
+                    <h1>Welcome to ALPFA Power</h1>
+                    <p>Connecting Latino Leaders for Impact</p>
+                    <h4>
+                    <ReactTyped
+                    strings={[
+                        "Hola",
+                        "Get connected",
+                        "Conéctate",
+                        "Find your job",
+                        "Encuentra tu trabajo",
+                        "Discover events",
+                        "Descubre eventos"
+                    ]}
+                    typeSpeed={120}
+                    backSpeed={50}
+                    loop
                     />
-                </p>
+                </h4>
             </header>
             <section className="mission">
                 <div className="container">
@@ -59,9 +61,6 @@ const LandingPage = () => {
                 </div>
             </section>
             <footer className="footer">
-                <div className="container text-center">
-                    <p>&copy; 2023 ALPFA Power. All rights reserved.</p>
-                </div>
             </footer>
         </div>
     );

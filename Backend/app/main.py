@@ -3,6 +3,8 @@ from app.students import router as students_router
 from app.jobs import router as jobs_router
 from app.job_admin import router as job_admin_router
 from app.events import router as events_router
+from app.email_module import router as email_module_router
+
 
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
@@ -27,3 +29,4 @@ app.include_router(students_router)
 app.include_router(jobs_router)
 app.include_router(job_admin_router)
 app.include_router(events_router)
+app.include_router(email_module_router.router)

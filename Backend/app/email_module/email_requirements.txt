@@ -1,0 +1,7 @@
+fastapi==0.115.0
+google_api_python_client==2.146.0
+google_auth_oauthlib==1.2.1
+protobuf==5.28.2
+pydantic==2.9.2
+pytest==8.3.3
+Requests==2.32.3

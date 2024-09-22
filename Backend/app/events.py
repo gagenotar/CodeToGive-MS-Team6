@@ -30,3 +30,21 @@ def get_events(db: Session = Depends(get_db)):
         }
         for event in events
     ]
+
+# Create an event posting
+@router.post("/events")
+def create_event(event: EventCreate, db: Session = Depends(get_db)):
+    result = db.execute(
+        text("INSERT INTO events (event_name, event_type, description, sponsor_id) "
+             "VALUES (:event_name, :event_type, :description, :sponsor_id)"),
+        {
+            "event_name": event.event_name,
+            "event_type": event.event_type,
+            "description": event.description,
+            "sponsor_id": event.sponsor_id
+        }
+    )
+    db.commit()
+
+    new_event_id = result.lastrowid
+    return {"message": "Event posting successful", "event_id": new_event_id}

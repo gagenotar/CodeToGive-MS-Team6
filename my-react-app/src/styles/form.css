@@ -15,9 +15,6 @@ a{
   --background-color: #404040;
   --red: #e33940;
 }
-div {
-  color: black;
-}
 
 .background-color {
   background-color: var(--background-color);

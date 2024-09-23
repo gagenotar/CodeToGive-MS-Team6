@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
+import Details from "./pages/Details"
 import LoginAdmin from "./pages/AdminLogin"
 import RegisterAdmin from "./pages/AdminRegister"
 import Admin from "./pages/Admin"
@@ -37,6 +38,7 @@ function App() {
         <Route path="/logout" element={<Logout />}/>
         <Route path="/home" element={<Home />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/details/:id" element={<Details />}/>
         <Route path="/login/admin" element={<LoginAdmin />}/>
         <Route path="/register/admin" element={<RegisterAndLogoutAdmin />}/>
         <Route path="/admin" element={<Admin />}/>

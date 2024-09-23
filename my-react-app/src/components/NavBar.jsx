@@ -6,7 +6,7 @@ const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
-            <a className="navbar-brand" href="/admin">
+            <a className="navbar-brand" href="/home">
                 <img src={logo} alt="Logo" className="navbar-logo" />
             </a>
             <div className="collapse navbar-collapse" id="navbarNav">

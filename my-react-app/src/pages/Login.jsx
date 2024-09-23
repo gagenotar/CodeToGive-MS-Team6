@@ -42,7 +42,9 @@ const Login = () => {
       <div className="background-color">
         <div className="form-header">
           <div className="title">Welcome! Login</div>
-          <img className="logo" src={alpfaLogo} alt="" />
+          <a href="/">
+            <img className="logo" src={alpfaLogo} alt=""/>
+          </a>
         </div>
         <LoginForm
           fields={fields}

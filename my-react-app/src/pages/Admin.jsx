@@ -74,7 +74,7 @@ const Admin = () => {
                         </div>
                         <div className='row'>
                             <div>
-                                <a href={`participants/${event.event_id}`} className="btn disabled btn-primary mx-1">View Participants</a>
+                                <a href={`participants/${event.event_id}`} className="btn btn-primary mx-1">View Participants</a>
                             </div>
                         </div>
                     </div>

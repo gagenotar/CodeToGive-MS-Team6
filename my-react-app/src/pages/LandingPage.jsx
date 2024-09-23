@@ -24,7 +24,7 @@ const LandingPage = () => {
                 </div>
             </nav>
             <header className="header text-center">
-                    <h1>Welcome to ALPFA Power</h1>
+                    <h1>Welcome to ALPFA Connect</h1>
                     <p>Connecting Latino Leaders for Impact</p>
                     <h4>
                     <ReactTyped
@@ -46,7 +46,7 @@ const LandingPage = () => {
             <section className="mission">
                 <div className="container">
                     <h2>Our Mission</h2>
-                    <p>At ALPFA Power, we aim to connect Latino leaders for impact by providing personalized connections to jobs and events. Our platform is designed to enhance satisfaction and streamline the hiring process for both job seekers and sponsors.</p>
+                    <p>At ALPFA Connect, we aim to connect Latino leaders for impact by providing personalized connections to jobs and events. Our platform is designed to enhance satisfaction and streamline the hiring process for both job seekers and sponsors.</p>
                 </div>
             </section>
             <section className="goals">

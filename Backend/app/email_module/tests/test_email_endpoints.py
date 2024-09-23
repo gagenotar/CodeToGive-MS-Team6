@@ -22,7 +22,7 @@ def test_notify_applicant():
     url = f"{BASE_URL}/send-email/"
     applicant = {
         "name": "John Doe",
-        "email": "john.doe@example.com",
+        "email": "team6codetogive@gmail.com",
         "profile_link": "http://example.com/profile/johndoe"
     }
     email_request = EmailRequest(

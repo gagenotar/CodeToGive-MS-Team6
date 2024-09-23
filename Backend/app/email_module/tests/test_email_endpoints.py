@@ -52,3 +52,42 @@ def test_notify_recruiter():
     assert response.status_code == 200
     assert response.json() == {"message": "Notification sent successfully"}
 
+def test_applicant_interest():
+    url = f"{BASE_URL}/applicant-interest/"
+    applicant = {
+        "name": "John Doe",
+        "email": "team6codetogive@gmail.com",
+        "profile_link": "http://example.com/profile/johndoe"
+    }
+    recruiter = {
+        "name": "Recruiter Name",
+        "email": "team6codetogive@gmail.com"
+    }
+    payload = {
+        "applicant": applicant,
+        "recruiter": recruiter
+    }
+    response = requests.post(url, json=payload)
+    print(response.json())
+    assert response.status_code == 200
+    assert response.json() == {"message": "Interest email sent successfully"}
+
+def test_recruiter_interest():
+    url = f"{BASE_URL}/recruiter-interest/"
+    applicant = {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "profile_link": "http://example.com/profile/johndoe"
+    }
+    recruiter = {
+        "name": "Recruiter Name",
+        "email": "team6codetogive@gmail.com"
+    }
+    payload = {
+        "applicant": applicant,
+        "recruiter": recruiter
+    }
+    response = requests.post(url, json=payload)
+    print(response.json())
+    assert response.status_code == 200
+    assert response.json() == {"message": "Interest email sent successfully"}

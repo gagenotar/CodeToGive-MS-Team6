@@ -79,3 +79,5 @@ dmypy.json
 
 # macOS system files
 .DS_Store
+
+venv/

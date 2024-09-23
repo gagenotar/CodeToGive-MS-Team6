@@ -96,3 +96,5 @@ storybook-static/
 *.cer
 *.crt
 *.key
+
+venv/

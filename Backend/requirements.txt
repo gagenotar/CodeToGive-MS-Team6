@@ -1,0 +1,30 @@
+# FastAPI and Uvicorn for the web framework and ASGI server
+fastapi==0.95.2
+uvicorn[standard]==0.23.1
+
+# SQLAlchemy for ORM
+SQLAlchemy==2.0.21
+
+# Database Driver for MySQL (PyMySQL)
+pymysql==1.0.3
+
+# Cohere API for text generation
+cohere==4.9.0
+
+# dotenv for managing environment variables
+python-dotenv==1.0.0
+
+# Alembic for database migrations (if needed)
+alembic==1.11.1
+
+# Optional: Pydantic for data validation (FastAPI already includes this, so this is not mandatory)
+pydantic==1.10.2
+
+# Optional: Flake8 for linting
+flake8==6.1.0
+
+# Optional: Pytest for testing
+pytest==7.4.2
+
+# Requests for email system
+requests

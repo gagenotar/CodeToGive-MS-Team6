@@ -85,3 +85,20 @@ def recruiter_interest(applicant: Applicant, recruiter: Recruiter):
             raise HTTPException(status_code=500, detail="Failed to send interest email")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/confirm-application/")
+def confirm_application(applicant: Applicant, recruiter: Recruiter):
+    try:
+        body = generate_email_body(applicant, recruiter, email_type="confirm_application")
+        subject = "Application Received - Thank You"
+        response = email_service.send_email(
+            subject,
+            body,
+            [applicant.email]
+        )
+        if response:
+            return {"message": "Confirmation email sent successfully"}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to send confirmation email")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

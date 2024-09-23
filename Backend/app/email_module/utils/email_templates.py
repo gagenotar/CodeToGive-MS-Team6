@@ -34,5 +34,12 @@ def generate_email_body(applicant: Applicant, recruiter: Recruiter = None, email
         <p>Looking forward to discussing this opportunity with you.</p>
         <p>Best regards,<br>{recruiter.name}</p>
         """
+    elif email_type == "confirm_application":
+        return f"""
+        <p>Hello {applicant.name},</p>
+        <p>Thank you for your application. We have received it and will be reviewing it shortly.</p>
+        <p>We appreciate your interest in our company and will get back to you soon.</p>
+        <p>Best regards,<br>{recruiter.name}</p>
+        """
     else:
-        raise ValueError("Invalid email type. Must be 'applicant', 'recruiter', 'applicant_interest', or 'recruiter_interest'.")
+        raise ValueError("Invalid email type. Must be 'applicant', 'recruiter', 'applicant_interest', 'recruiter_interest', or 'confirm_application'.")

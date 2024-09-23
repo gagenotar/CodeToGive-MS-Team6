@@ -40,7 +40,9 @@ const Login = () => {
       <div className="background-color">
         <div className="form-header">
           <div className="title">Welcome Admin! Login</div>
-          <img className="logo" src={alpfaLogo} alt="" />
+          <a href="/">
+            <img className="logo" src={alpfaLogo} alt=""/>
+          </a>
         </div>
         <AdminLoginForm
           fields={fields}

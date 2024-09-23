@@ -45,7 +45,9 @@ const Register = () => {
       <div className="background-color">
         <div className="form-header">
           <div className="title">Sign Up</div>
-          <img className="logo" src={alpfaLogo} alt="" />
+          <a href="/">
+            <img className="logo" src={alpfaLogo} alt=""/>
+          </a>
         </div>
         <RegisterForm
           fields={fields}

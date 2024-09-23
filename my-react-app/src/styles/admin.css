@@ -1,0 +1,64 @@
+/* Define colors */
+:root {
+    --main-color: #404040;
+    --accent-color: #0093BB;
+    --white-color: #ffffff;
+    --danger-color: #e33940;
+    --action-hover-color: #007a99; /* Darker shade of accent color */
+    --danger-hover-color: #c12f38; /* Darker shade of danger color */
+}
+
+/* Apply main color to background */
+body {
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+/* Apply white color to containers */
+.container, .card {
+    background-color: var(--white-color);
+    color: #000000; /* Ensure text is black */
+}
+
+/* Apply accent color to buttons */
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--action-hover-color);
+    border-color: var(--action-hover-color);
+}
+
+/* Apply danger color to delete buttons */
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover-color);
+    border-color: var(--danger-hover-color);
+}
+
+/* Additional styling for better appearance */
+.card {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+#home-wrapper {
+    background-color: var(--main-color);
+}

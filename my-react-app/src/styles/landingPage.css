@@ -1,0 +1,84 @@
+/* Define colors */
+:root {
+    --main-color: #404040;
+    --accent-color: #0093BB;
+    --white-color: #ffffff;
+    --danger-color: #e33940;
+    --action-hover-color: #007a99; /* Darker shade of accent color */
+    --danger-hover-color: #c12f38; /* Darker shade of danger color */
+}
+
+/* Navbar styles */
+.custom-navbar {
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+.navbar-brand .navbar-logo {
+    height: 40px;
+}
+
+.nav-link {
+    color: var(--white-color);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.navbar-toggler {
+    border-color: var(--white-color);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Landing page styles */
+.landing-page {
+    font-family: Arial, sans-serif;
+    color: var(--white-color);
+}
+
+.header {
+    background-color: var(--main-color);
+    padding: 50px 0;
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.header p {
+    font-size: 1.25rem;
+}
+
+.mission, .goals {
+    background-color: var(--white-color);
+    color: #000000; /* Ensure text is black */
+    padding: 50px 0;
+}
+
+.mission h2, .goals h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.mission p, .goals ul {
+    font-size: 1.25rem;
+}
+
+.goals ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.footer {
+    background-color: var(--main-color);
+    padding: 20px 0;
+}
+
+.footer p {
+    margin: 0;
+}

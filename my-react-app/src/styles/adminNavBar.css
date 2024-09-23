@@ -1,0 +1,59 @@
+/* Define colors */
+:root {
+    --main-color: #404040;
+    --accent-color: #0093BB;
+    --white-color: #ffffff;
+    --danger-color: #e33940;
+    --action-hover-color: #007a99; /* Darker shade of accent color */
+    --danger-hover-color: #c12f38; /* Darker shade of danger color */
+}
+
+/* Navbar styles */
+.custom-navbar {
+    background-color: var(--main-color);
+    color: var(--white-color);
+    padding: 10px;
+}
+
+.navbar-brand .navbar-logo {
+    height: 40px;
+}
+
+.nav-link {
+    color: var(--white-color);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.navbar-toggler {
+    border-color: var(--white-color);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.dropdown-menu {
+    background-color: var(--white-color);
+    color: #000000; /* Ensure text is black */
+}
+
+.dropdown-item {
+    color: #000000;
+}
+
+.dropdown-item:hover {
+    background-color: var(--accent-color);
+    color: var(--white-color);
+}
+
+/* List items in navbar */
+.navbar-nav .nav-item .nav-link {
+    color: var(--white-color);
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: var(--accent-color);
+}
